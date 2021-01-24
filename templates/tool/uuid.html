@@ -14,28 +14,28 @@
                     </div>
                     <table class="table table-striped table-bordered table-hover">
                         <thead>
-                        <tr>
-                            <th class="text-left">类型</th>
-                            <th>值</th>
-                        </tr>
+                            <tr>
+                                <th class="text-left">类型</th>
+                                <th>值</th>
+                            </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>小写带分隔符</td>
-                            <td id="uuidContentSep"></td>
-                        </tr>
-                        <tr>
-                            <td>小写不带分隔符</td>
-                            <td id="uuidContentNoSep"></td>
-                        </tr>
-                        <tr>
-                            <td>大写带分隔符</td>
-                            <td id="uuidContentSepUpper"></td>
-                        </tr>
-                        <tr>
-                            <td>大写不带分隔符</td>
-                            <td id="uuidContentNoSepUpper"></td>
-                        </tr>
+                            <tr>
+                                <td>小写不带分隔符</td>
+                                <td id="lower-without-sep"></td>
+                            </tr>
+                            <tr>
+                                <td>小写带分隔符</td>
+                                <td id="lower-with-sep"></td>
+                            </tr>
+                            <tr>
+                                <td>大写不带分隔符</td>
+                                <td id="upper-without-sep"></td>
+                            </tr>
+                            <tr>
+                                <td>大写带分隔符</td>
+                                <td id="upper-with-sep"></td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -52,8 +52,8 @@
         for (let i = 0; i < 36; i++) {
             s[i] = hexDigits.substr(Math.floor(Math.random() * 0x10), 1);
         }
-        s[14] = '4';  // bits 12-15 of the time_hi_and_version field to 0010
-        s[19] = hexDigits.substr((s[19] & 0x3) | 0x8, 1);  // bits 6-7 of the clock_seq_hi_and_reserved to 01
+        s[14] = '4'; // bits 12-15 of the time_hi_and_version field to 0010
+        s[19] = hexDigits.substr((s[19] & 0x3) | 0x8, 1); // bits 6-7 of the clock_seq_hi_and_reserved to 01
         s[8] = s[13] = s[18] = s[23] = '-';
         return s.join('');
     }
@@ -76,14 +76,25 @@
         return ret
     }
 
+    function fill_sep(value){
+        // value的长度为32
+        const list = value.split('')
+        list.splice(8, 0, '-')
+        list.splice(13, 0, '-')
+        list.splice(18, 0, '-')
+        list.splice(23, 0, '-')
+        return list.join('')
+    }
+
 
     function format(origin) {
         if (cond1(origin) || cond2(origin)) {
-            const uNotSep = origin.replace(/-/g, '').toLowerCase();
-            document.querySelector('#uuidContentSep').innerText = origin;
-            document.querySelector('#uuidContentSepUpper').innerText = origin.toUpperCase();
-            document.querySelector('#uuidContentNoSep').innerText = uNotSep;
-            document.querySelector('#uuidContentNoSepUpper').innerText = uNotSep.toUpperCase();
+            const lowerWithoutSep = origin.replace(/-/g, '').toLowerCase();
+            const upperWithoutSep = lowerWithoutSep.toUpperCase();
+            document.querySelector('#lower-without-sep').innerText = lowerWithoutSep;
+            document.querySelector('#lower-with-sep').innerText = fill_sep(lowerWithoutSep);
+            document.querySelector('#upper-without-sep').innerText = upperWithoutSep;
+            document.querySelector('#upper-with-sep').innerText = fill_sep(upperWithoutSep);
         } else {
             alert('格式不正确')
         }
@@ -99,6 +110,5 @@
             format(value)
         }
     }
-
 </script>
 {% endblock %}
