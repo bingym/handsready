@@ -1,0 +1,506 @@
+{% extends '../layout.html' %}
+{% block title %}索尼α相机 快门数查询工具 Sony Alpha shutter count tool{% endblock %}
+{% block description %}索尼微单相机快门数在线查询工具{% endblock %}
+{% block keywords %}索尼快门数,快门数查询,索尼微单快门数,a73快门数,a7m3快门数,a7r3快门数,a6300快门数,a6000快门数,索尼a7快门数,在线查询{% endblock %}
+{% block style %}
+<style>
+    #copyrightcolor {
+        color: #C0C0C0;
+    }
+
+    #footercolor {
+        color: #808080;
+    }
+
+    div.hide {
+        display: none;
+    }
+
+    div.instructions {
+        margin: 16px;
+        max-width: 640px;
+    }
+
+    div.title {
+        font-size: 17px;
+        font-weight: bold;
+        line-height: 23px;
+    }
+
+    div.droppable {
+        text-align: center;
+        border: 1px solid #a0a0a0;
+        border-radius: 8px;
+        padding: 4px;
+        padding-left: 60px;
+        padding-top: 30px;
+        background-color: #e0e0e0;
+        width: 420px;
+        height: 100px;
+        color: #928e7e;
+        background-size: 100px 100px;
+        background-repeat: no-repeat;
+        background-position: 90px -20px;
+        cursor: pointer;
+        margin: 16px;
+    }
+
+    div.result {
+        margin-top: 16px;
+        margin-left: 16px;
+        max-width: 420px;
+        border-radius: 8px;
+        border: 1px solid #a0a0a0;
+        background-color: #f0f0e0;
+        padding: 4px;
+        padding-left: 12px;
+        height: 130px;
+    }
+
+    div.fname {
+        max-width: 180px;
+        width: 180px;
+        font-size: 16px;
+        font-weight: bold;
+        margin-top: 14px;
+    }
+
+    div.ftime {
+        max-width: 180px;
+        width: 180px;
+        font-size: 15px;
+        margin-top: 18px;
+    }
+
+    div.images {
+        float: left;
+        margin-top: 9px;
+    }
+
+    div.img {
+        font-size: 20px;
+        line-height: 28px;
+        margin-bottom: 9px;
+        font-weight: bold;
+    }
+
+    div#supportedCams {
+        color: #20a040;
+    }
+
+    a {
+        color: #0072ba;
+
+    }
+</style>
+{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-10 mx-auto col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title mb-0">
+                        <h3 class="mb-0">索尼α相机快门查询工具</h3>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="card-text">
+                        此工具会依据您选择的图片文件进行快门次数查询。<br/>
+                        <b>仅支持原始的JPG或ARW文件</b>，任何照片编辑软件都会损坏这些数据。<br/>
+                        您的文件不会被上传到任何地方，因为此程序是在浏览器中本地运行的，且只读取文件的EXIF信息，不会对照片内容进行任何分析。<br/>
+                        <br/>
+                        <b>支持的相机：</b><br/>
+                        索尼E卡口机身：<br/>
+                        ILCE-7、ILCE-7R、ILCE-7S、ILCE-7M2、ILCE-7RM2、ILCE-7SM2、ILCE-7M3、ILCE-7RM3、ILCE-9、ILCE-3000、ILCE-3500、ILCE-5000、ILCE-5100、ILCE-6000、ILCE-6300、ILCE-6500、NEX-3、NEX-C3、NEX-F3、NEX-3N、NEX-5、NEX-5N、NEX-5R、NEX-5T、NEX-6、NEX-7<br/>
+                        索尼A卡口机身：<br/>
+                        DSLR-A230、DSLR-A290、DSLR-A330、DSLR-A380、DSLR-A390、DSLR-A450、DSLR-A500、DSLR-A550、DSLR-A560、DSLR-A580、DSLR-A850、DSLR-A900、SLT-A33、SLT-A35、SLT-A37、SLT-A55、SLT-A55V、SLT-A57、SLT-A58、SLT-A65、SLT-A65V、SLT-A77、SLT-A77V、SLT-A99、SLT-A99V、ILCA-68、ILCA-77M2、ILCA-99M2<br/>
+                        <div id="supportedCams" style="display: none;"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="droppable">
+                <div style="margin-top: 4px;">
+                    点击选择文件<br/>或拖动文件到这里
+                </div>
+            </div>
+            <div id="results">
+            </div>
+
+            <div id="resultTemplate" style="display: none;">
+                <div class="result">
+                    <div style="float: left;">
+                        <div class="fname">
+                            {FNAME}
+                        </div>
+                        <div class="ftime">
+                            {MAKE} {MODEL}<br/>
+                            拍摄于<br/>
+                            {FTIME}
+                        </div>
+                    </div>
+                    <div class="images">
+                        截止此文件，快门数已达
+                        <div class="img">
+                            {IMG}
+                        </div>
+                        <div class="{HIDE}">
+                            Shutter actuations up to this file
+                            <div class="img">
+                                {SHUT}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block script %}
+{% endblock %}
+{% block javascript %}
+<script>
+    var UI8 = 1;	// unsigned byte
+    var STR = 2;	// ascii string
+    var UI16 = 3;	// unsigned int
+    var UI32 = 4;	// unsigned long
+    var UR = 5;	// unsigned rational
+    var SI8 = 6;	// signed byte
+    var UND = 7;	// not defined
+    var SI16 = 8;	// signed int
+    var SI32 = 9;	// signed long
+    var SR = 10;	// signed rational
+    var SFL = 11;	// single float
+    var DFL = 12;	// double float
+
+    var lengths = [0, 1, 1, 2, 4, 8, 1, 1, 2, 4, 8, 4, 8];
+    var DSLRs = ['DSLR-A900', 'DSLR-A330', 'DSLR-A380', 'DSLR-A230', 'DSLR-A850', 'DSLR-A290', 'DSLR-A390'];
+    var A500s = ['DSLR-A450', 'DSLR-A500', 'DSLR-A550'];
+    var DSLTs = ['NEX-3', 'NEX-5', 'SLT-A33', 'SLT-A55', 'SLT-A55V', 'DSLR-A560', 'DSLR-A580', 'NEX-C3', 'SLT-A35'];
+    var ILCs = ['SLT-A37', 'SLT-A57', 'SLT-A77', 'SLT-A77V', 'SLT-A99V', 'SLT-A99', 'NEX-F3', 'NEX-3N', 'NEX-5N', 'NEX-5R', 'NEX-6', 'NEX-7', 'SLT-A65', 'SLT-A65V', 'NEX-5T', 'ILCE-3000', 'ILCE-5000', 'ILCE-6000', 'ILCE-5100', 'ILCE-3500', 'ILCE-7R', 'ILCE-7S', 'ILCE-7', 'ILCA-77M2', 'SLT-A58', 'ILCE-7M2', 'ILCA-68'];
+    var newILCs = ['ILCE-6300', 'ILCE-6500', 'ILCE-7M3', 'ILCE-7RM2', 'ILCE-7RM3', 'ILCE-7SM2', 'ILCE-9', 'ILCA-99M2'];
+
+    var supported = DSLRs.concat(A500s).concat(DSLTs).concat(ILCs).concat(newILCs);
+    supported.sort();
+    var dTable = [];
+
+    function fillDecipherTable() {
+        var i = 0;
+        while (i < 249) {
+            dTable.push((i * i * i) % 249);
+            i++;
+        }
+        while (i < 256) {
+            dTable.push(i);
+            i++;
+        }
+    }
+
+    function doB(b) {
+        return dTable.indexOf(b);
+    }
+
+    function fillSupported() {
+        document.getElementById('supportedCams').innerHTML = supported.join(', ');
+    }
+
+    function toggleSupported() {
+        var spEl = document.getElementById('supportedCams');
+        if (spEl.style.display == 'block') {
+            spEl.style.display = 'none';
+        } else {
+            spEl.style.display = 'block';
+        }
+    }
+
+    function makeDroppable(element, callback) {
+        var input = document.createElement('input');
+        input.setAttribute('type', 'file');
+        input.setAttribute('multiple', true);
+        input.style.display = 'none';
+        input.addEventListener('change', triggerCallback);
+        element.appendChild(input);
+
+        element.addEventListener('dragover', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            element.classList.add('dragover');
+        });
+
+        element.addEventListener('dragleave', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            element.classList.remove('dragover');
+        });
+
+        element.addEventListener('drop', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            element.classList.remove('dragover');
+            triggerCallback(e);
+        });
+
+        element.addEventListener('click', function () {
+            input.value = null;
+            input.click();
+        });
+
+        function triggerCallback(e) {
+            var files;
+            if (e.dataTransfer) {
+                files = e.dataTransfer.files;
+            } else if (e.target) {
+                files = e.target.files;
+            }
+            callback.call(null, files);
+        }
+    }
+
+
+    function imgHandler(files) {
+        var c = 0;
+        while (c < files.length) {
+            // first read the first 24 bytes to check format and EXIF
+            readByteBlob(0, 24, files[c], checkHeader);
+            c++;
+        }
+    }
+
+    function checkHeader(byteArray, file) {
+        var view = new Uint8Array(byteArray);
+        if (view[0] == 0xff && view[1] == 0xd8) {
+            // JPEG image, header size is known
+            var headerSize = 256 * view[4] + view[5];
+            readByteBlob(12, headerSize + 4, file, parseTiffHeader);
+        } else if (view[0] == 0x49 && view[1] == 0x49) {
+            // TIFF header at start, grab 100k of data, it should always be enough
+            readByteBlob(0, 100 * 1024, file, parseTiffHeader);
+        } else {
+            // not sure what to do here
+        }
+    }
+
+    function parseTiffHeader(byteArray, file) {
+        // convert the data to a viewable entity, see HTML5 File/Blob api for details
+        var view = new Uint8Array(byteArray);
+        // let's verify that it's a tiff format
+        var exifAddr = null;
+        var make = '';
+        var model = '';
+        var time = '';
+        // SONY cameras use II (intel) encoding, also known as little endian encoding
+        if (!(view[0] == 0x49 && view[1] == 0x49)) return;
+        var cA = 8;
+        var ifdEntries = view[cA + 1] * 256 + view[cA];
+        cA += 2;
+        while (ifdEntries > 0) {
+            tag = parseTag(view, cA);
+            // exif subifd memory location 0x8769
+            if (tag.tag == 0x87 * 256 + 0x69) exifAddr = tag.value;
+            // make 0x010f
+            if (tag.tag == 256 + 0x0f) make = tag.value;
+            // model 0x0110
+            if (tag.tag == 256 + 0x10) model = tag.value.trim().substring(0, tag.value.trim().length - 1);
+            cA += 12;
+            ifdEntries--;
+        }
+
+        if (exifAddr == null) return;
+        var sonyAddr = null;
+        cA = exifAddr;
+        ifdEntries = view[cA + 1] * 256 + view[cA];
+        cA += 2;
+        while (ifdEntries > 0) {
+            tag = parseTag(view, cA);
+            // makernote 0x927c
+            if (tag.tag == 0x92 * 256 + 0x7c) sonyAddr = tag.value;
+            // date original 0x9003
+            if (tag.tag == 0x90 * 256 + 3) time = tag.value;
+            cA += 12;
+            ifdEntries--;
+        }
+        // offset is 12 "SONY DSC 000 if SONY appears here, otherwise no offset"
+        cA = sonyAddr;
+        if (view[sonyAddr] == 83 && view[sonyAddr + 1] == 79 && view[sonyAddr + 1] == 78 && view[sonyAddr + 1] == 89) cA = sonyAddr + 12;
+
+        var wantedTag = null;
+        var wantedTag2 = null;
+        var wantedAddr = null;
+        var wantedAddr2 = null;
+        var decipher = false;
+        ifdEntries = view[cA + 1] * 256 + view[cA];
+        if (DSLRs.indexOf(model) > -1) {//.indexOf(model.substr(0,model.length-1)) > -1) {
+            // old DSLRs store this in 0x0200 which is a binary blob
+            wantedTag = 32;
+            // counter is at 0x0846
+            wantedAddr = 2118;
+        }
+        if (ILCs.indexOf(model) > -1) {
+            // earlier ILCE(A) models store it in 0x9050 which is a binary blob
+            wantedTag = 0x90 * 256 + 0x50;
+            // counter is at 0x0032
+            wantedAddr = 50;
+        }
+        if (newILCs.indexOf(model) > -1) {
+            // latest ILCE(A) models store it in 0x9050 which is a binary blob
+            wantedTag = 0x90 * 256 + 0x50;
+            // counter is at 0x003a
+            wantedAddr = 58;
+        }
+        if (A500s.indexOf(model) > -1) {
+            // A450, A500, A550 store it in 0x0020, but it is NOT a binary blob
+            // The tag is organized in this format
+            // [TTTT][SSSS][SUBTAGS][BINARYBLOBDATA] where TTTT = tag id, SSSS = tag size
+            // SUBTAGS look like this:
+            // [TTTT][AAAA] where TTTT = subtag id, AAAA = offset of binary blob data from 1st byte of the PARENT TAG!!!
+            wantedTag = 32;
+            // subtag 0x0201
+            wantedTag2 = 513;
+            // address = 0x014a
+            wantedAddr = 330;
+        }
+        if (DSLTs.indexOf(model) > -1) {
+            // A55 generation + early NEX store it in 0x0020, format is same as above
+            wantedTag = 32;
+            // subtag 0x0201
+            wantedTag2 = 513;
+            // address of exposure count
+            wantedAddr = 283;
+            // address of shutter count
+            // due to the live preview and double shutter action of these cameras this number is significantly higher
+            wantedAddr2 = 293
+        }
+        // tag 9050 is enciphered with a substition cipher where EB=(B*B*B)%249 for values 0-248 and EB=B for values 249-255 where B = real byte value and EB = encrypted byte value
+        if (wantedTag == 0x90 * 256 + 0x50) decipher = true;
+        cA += 2;
+        var result1 = 0;
+        var result2 = null;
+        while (ifdEntries > 0) {
+            tag = parseTag(view, cA);
+            if (tag.tag == wantedTag) {
+                if (wantedTag2 != null) {
+                    // set pointer to subdirectory and stop browsing current one
+                    cA = tag.value;
+                    break;
+                }
+                if (decipher) {
+                    result1 = doB(view[tag.value + wantedAddr]) + doB(view[tag.value + wantedAddr + 1]) * 256 + doB(view[tag.value + wantedAddr + 2]) * 256 * 256;
+                } else {
+                    result1 = view[tag.value + wantedAddr] + view[tag.value + wantedAddr + 1] * 256 + view[tag.value + wantedAddr + 2] * 256 * 256;
+                }
+                break;
+            }
+
+            cA += 12;
+            ifdEntries--;
+        }
+        if (wantedTag2 != null) {
+            // store the start of the subdirectory, since all offsets are relative to this
+            var tStart = cA;
+            ifdEntries = view[cA + 1] * 256 + view[cA];
+            cA += 4;
+            while (ifdEntries > 0) {
+                tag = view[cA + 1] * 256 + view[cA];
+                if (tag == wantedTag2) {
+                    var offset = view[cA + 3] * 256 + view[cA + 2];
+                    result1 = view[tStart + offset + wantedAddr] + view[tStart + offset + wantedAddr + 1] * 256 + view[tStart + offset + wantedAddr + 2] * 256 * 256;
+                    if (wantedAddr2 != null) {
+                        result2 = view[tStart + offset + wantedAddr2] + view[tStart + offset + wantedAddr2 + 1] * 256 + view[tStart + offset + wantedAddr2 + 2] * 256 * 256;
+                    }
+                    break;
+
+                }
+                cA += 4; // be careful, entries here are not by tiff standard
+                ifdEntries--;
+            }
+        }
+        publishResults(make, model, time, file.name, result1, result2);
+    }
+
+    function parseTag(arr, pos) {
+        // TIFF tag is as follows:
+        // [TTTT][FFFF][SSSS][VVVV]
+        // TTTT = tag id
+        // FFFF = format (see vars at top of code)
+        // SSSS = number of "components" (for example if format is double float and size is 1 then the actual size is 8 bytes, this number is useful if type is string or if type is "7" i.e. makernote directory and subdirectories
+        // VVVV = if byte size of tag is 4 or less, then this is the value, otherwise it is the address, counting from the start of the TIFF header data
+        var rt = new Object();
+        var tag = arr[pos + 1] * 256 + arr[pos];
+        var format = arr[pos + 2]; // format is always less than 255
+        var size = arr[pos + 4] + arr[pos + 5] * 256 + arr[pos + 6] * 256 + arr[pos + 7] * 256;
+        var value = null;
+        if (size <= 4) {
+            // grab actual value from tag
+            value = grabData(format, arr, pos + 8, 4);
+        } else {
+            // grab actual value from address
+            value = grabData(format, arr, grabData(UI32, arr, pos + 8, 4), size);
+        }
+        rt.tag = tag;
+        rt.format = format;
+        rt.value = value;
+        rt.size = size;
+        // if format is 7, return the VVVV, which is the address, and we will process this manually
+        if (format == UND) rt.value = grabData(UI32, arr, pos + 8, 4);
+        return rt;
+    }
+
+    function readByteBlob(startByte, stopByte, file, callback) {
+        // see HTML5 FileApi fro details on this
+        var reader = new FileReader();
+        reader.onloadend = function (e) {
+            if (e.target.readyState == FileReader.DONE) {
+                callback.call(null, e.target.result, file);
+            }
+        }
+        var blob = file.slice(startByte, stopByte + 1);
+        reader.readAsArrayBuffer(blob);
+    }
+
+    window.onload = function () {
+        fillDecipherTable();
+        fillSupported();
+        var ulElement = document.querySelector('.droppable');
+        makeDroppable(ulElement, imgHandler);
+    }
+
+    function grabData(type, arr, pos, size) {
+        if (type == UI8) return arr[pos];
+        if (type == STR) {
+            var i = 0;
+            var rt = '';
+            while (i < size) {
+                rt += String.fromCharCode(parseInt(arr[pos + i]));
+                i++;
+            }
+            return rt;
+        }
+        if (type == UI16) return arr[pos + 1] * 256 + arr[pos];
+        if (type == UI32) return arr[pos + 3] * 256 * 256 * 256 + arr[pos + 2] * 256 * 256 + arr[pos + 1] * 256 + arr[pos];
+        if (type == UND) {
+            return arr.slice(pos, pos + size);
+        }
+    }
+
+    function buf2hex(buffer) { // buffer is an ArrayBuffer
+        return Array.prototype.map.call(new Uint8Array(buffer), x => ('00' + x.toString(16)).slice(-2)).join('');
+    }
+
+    function publishResults(make, model, time, fileName, img, shut) {
+        var template = document.getElementById('resultTemplate').innerHTML;
+        template = template.replace(/{FNAME}/, fileName);
+        template = template.replace(/{MAKE}/, make);
+        template = template.replace(/{MODEL}/, model);
+        template = template.replace(/{FTIME}/, time);
+        template = template.replace(/{IMG}/, img);
+        if (shut != null) {
+            template = template.replace(/{SHUT}/, shut);
+        } else {
+            template = template.replace(/{HIDE}/, 'hide');
+        }
+        var results = document.getElementById('results');
+        results.innerHTML = template + results.innerHTML;
+    }
+</script>
+{% endblock %}

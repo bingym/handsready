@@ -1,0 +1,53 @@
+{% extends "../layout.html" %}
+{% block title %}Photos{% endblock %}
+{% block script %}
+<script src="/static/js/jquery.justifiedGallery.min.js"></script>
+<script src="/static/js/spotlight.js"></script>
+{% endblock %}
+{% block css %}
+<link rel="stylesheet" href="/static/css/justifiedGallery.min.css">
+{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="alert alert-secondary">...</div>
+    <div id="gallery">
+        {% for photo in paginator.Data %}
+        <a
+                href="https://res-photos.threestories.cn/{{ photo.Key }}-ts_photo_preview"
+                class="spotlight"
+                title="{{photo.Desc}}_{{photo.PhotoTime | datetime_format}}"
+        >
+            <img src="https://res-photos.threestories.cn/{{ photo.Key }}-ts_photo4list" alt="">
+        </a>
+        {% endfor %}
+    </div>
+    <div class="paginate mt-2">
+        {% if paginator.HasPrev %}
+        <a
+                class="btn page-link d-inline-block"
+                id="prevBtn"
+                href="/photo?page={{ paginator.PrevNum }}"
+        >
+            Prev
+        </a>
+        {% endif %}
+        {% if paginator.HasNext %}
+        <a
+                class="btn page-link d-inline-block"
+                id="nextBtn"
+                href="/photo?page={{ paginator.NextNum }}"
+        >
+            Next
+        </a>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
+{% block javascript %}
+<script>
+    $('#gallery').justifiedGallery({
+        rowHeight: 160,
+        margins: 2
+    });
+</script>
+{% endblock %}

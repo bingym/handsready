@@ -1,0 +1,40 @@
+{% extends '../layout.html' %}
+{% block title %}技术书籍{% endblock %}
+{% block description %}技术书籍{% endblock %}
+{% block keywords %}技术书籍{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="row text-center" id="books">
+        <div class="col-12 mx-auto">
+            <h3 class="h3">技术书籍</h3>
+        </div>
+        {% for bookGroup in bookGroups %}
+        <div class="col-12 mx-auto">
+            <h5 class="text-left">{{ bookGroup.Name }}</h5>
+            <div class="table-responsive">
+                <table class="table table-bordered table-sm">
+                    <thead class="thead-light">
+                    <tr>
+                        <th>项目名称</th>
+                        <th>项目描述</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for book in bookGroup.Books %}
+                    <tr>
+                        <td class="align-middle"><a target="_blank" href="{{book.URL }}">{{book.Name }}</a></td>
+                        <td class="align-middle text-left">{{book.Description}}</td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
+{% block script %}
+{% endblock %}
+{% block javascript %}
+{% endblock %}

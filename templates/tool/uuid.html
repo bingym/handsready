@@ -1,0 +1,104 @@
+{% extends '../layout.html' %}
+{% block title %}UUID{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-10 mx-auto">
+            <div class="card">
+                <div class="card-header">UUID</div>
+                <div class="card-body">
+                    <div class="form-group d-flex">
+                        <input type="text" class="form-control mr-2" id="inputs">
+                        <button class="btn btn-link text-muted pr-0" id="gen">生成一个UUID</button>
+                        <button class="btn btn-primary ml-3" id="format">校验并格式化</button>
+                    </div>
+                    <table class="table table-striped table-bordered table-hover">
+                        <thead>
+                        <tr>
+                            <th class="text-left">类型</th>
+                            <th>值</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>小写带分隔符</td>
+                            <td id="uuidContentSep"></td>
+                        </tr>
+                        <tr>
+                            <td>小写不带分隔符</td>
+                            <td id="uuidContentNoSep"></td>
+                        </tr>
+                        <tr>
+                            <td>大写带分隔符</td>
+                            <td id="uuidContentSepUpper"></td>
+                        </tr>
+                        <tr>
+                            <td>大写不带分隔符</td>
+                            <td id="uuidContentNoSepUpper"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block javascript %}
+<script>
+    function getUUID() {
+        let s = [];
+        let hexDigits = '0123456789abcdef';
+        for (let i = 0; i < 36; i++) {
+            s[i] = hexDigits.substr(Math.floor(Math.random() * 0x10), 1);
+        }
+        s[14] = '4';  // bits 12-15 of the time_hi_and_version field to 0010
+        s[19] = hexDigits.substr((s[19] & 0x3) | 0x8, 1);  // bits 6-7 of the clock_seq_hi_and_reserved to 01
+        s[8] = s[13] = s[18] = s[23] = '-';
+        return s.join('');
+    }
+
+    function cond1(str) {
+        return str.length === 32 && !str.includes('-')
+    }
+
+    function cond2(str) {
+        let ret = false;
+        if (str.length === 36) {
+            const reResult = str.match(/-/ig);
+            if (reResult && reResult.length === 4) {
+                const s = new Set([str[8], str[13], str[18], str[23]]);
+                if (s.size === 1 && Array.from(s)[0] === '-') {
+                    ret = true;
+                }
+            }
+        }
+        return ret
+    }
+
+
+    function format(origin) {
+        if (cond1(origin) || cond2(origin)) {
+            const uNotSep = origin.replace(/-/g, '').toLowerCase();
+            document.querySelector('#uuidContentSep').innerText = origin;
+            document.querySelector('#uuidContentSepUpper').innerText = origin.toUpperCase();
+            document.querySelector('#uuidContentNoSep').innerText = uNotSep;
+            document.querySelector('#uuidContentNoSepUpper').innerText = uNotSep.toUpperCase();
+        } else {
+            alert('格式不正确')
+        }
+    }
+
+    document.querySelector('#gen').onclick = function () {
+        document.querySelector('#inputs').value = getUUID();
+    };
+
+    document.querySelector('#format').onclick = function () {
+        const value = document.querySelector('#inputs').value;
+        if (value) {
+            format(value)
+        }
+    }
+
+</script>
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends '../layout.html' %}
+{% block title %}URL编码/解码{% endblock %}
+{% block description %}URL编解码{% endblock %}
+{% block keywords %}url编码,url解码{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-10 mx-auto">
+            <h3 class="h3">URL编码/解码</h3>
+            <hr>
+            <div class="form-group">
+                <textarea id="left" cols="30" rows="10" class="form-control" placeholder="要编码的URL"></textarea>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-primary" id="encode">编码↓</button>
+                <button class="btn btn-primary float-right" id="decode">解码↑</button>
+            </div>
+            <div class="form-group">
+                <textarea id="right" cols="30" rows="10" class="form-control" placeholder="编码后的URL"></textarea>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block javascript %}
+<script>
+    $(function () {
+        $('#decode').click(function(){
+            const content = $('#right').val();
+            $('#left').val(decodeURIComponent(content));
+        });
+        $('#encode').click(function(){
+            const content = $('#left').val();
+            $('#right').val(encodeURIComponent(content));
+        })
+    });
+</script>
+{% endblock %}

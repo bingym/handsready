@@ -1,0 +1,130 @@
+{% extends '../layout.html' %}
+{% block title %}图片Exif信息查看{% endblock %}
+{% block description %}查看图片exif信息{% endblock %}
+{% block keywords %}照片exif,图片exif,exif在线查看,exif在线查询{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12 col-lg-10 mx-auto">
+            <h3 class="h3">Exif信息查看</h3>
+            注意：Exif标准只对.jpg和.tiff有效
+            <hr>
+            <div class="d-flex">
+                <div class="bg-secondary mr-5">
+                    <input type="file" id="imgFile">
+                    <button id="btn" class="btn btn-primary">Get</button>
+                </div>
+                <div>
+                    <img src="" alt="" width="300px" id="imgElement">
+                </div>
+            </div>
+            <hr>
+            <table class="table table-striped table-bordered table-hover table-sm">
+                <thead class="text-center">
+                <tr>
+                    <td>属性</td>
+                    <td>值</td>
+                    <td>说明</td>
+                </tr>
+                </thead>
+                <tbody id="tbody" class="text-center">
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <template id="row_template">
+        <tr>
+            <td>{attr}</td>
+            <td>{value}</td>
+            <td>{remark}</td>
+        </tr>
+    </template>
+</div>
+{% endblock %}
+{% block script %}
+<script src="/static/js/tool/exif-js.js"></script>
+{% endblock %}
+{% block javascript %}
+<script>
+    $(function () {
+        $('#btn').click(function () {
+            const img = document.querySelector('#imgFile');
+            const imgElemtent = document.querySelector('#imgElement');
+            if (img.files.length === 0) {
+                return
+            }
+            const src = window.URL.createObjectURL(img.files[0]);
+            imgElemtent.setAttribute('src', src);
+            imgElemtent.onload = function () {
+                EXIF.getData(imgElemtent, function () {
+                    const allTags = EXIF.getAllTags(this);
+                    const data = [
+                        ['图像来源/描述', allTags.ImageDescription],
+                        ['生产商', allTags.Make],
+                        ['型号', allTags.Model],
+                        ['拍摄方向', allTags.Orientation, ''],
+                        ['X轴分辨率', allTags.XResolution],
+                        ['Y轴分辨率', allTags.YResolution],
+                        ['分辨率单位', allTags.ResolutionUnit],
+                        ['固件版本', allTags.Software],
+                        ['拍摄日期时间', allTags.DateTime],
+                        ['白点色度', allTags.WhitePoint],
+                        ['主要色度', allTags.PrimaryChromaticities],
+                        ['颜色空间转换矩阵系数', allTags.YCbCrCoefficients],
+                        ['色相配置', allTags.YCbCrPositioning],
+                        ['ExifIFDPointer', allTags.ExifIFDPointer],
+                        // undefined: 2.2[2.2/10]
+                        ['曝光时间', allTags.ExposureTime],
+                        ['光圈值', allTags.FNumber],
+                        ['曝光程序', allTags.ExposureProgram],
+                        ['感光度ISO', allTags.ISOSpeedRatings],
+                        ['Exif版本', allTags.ExifVersion],
+                        ['创建时间', allTags.DateTimeOriginal],
+                        ['数字化创建时间', allTags.DateTimeDigitized],
+                        ['图像构造', allTags.ComponentsConfiguration],
+                        ['压缩时每像素色彩位', allTags.CompressedBitsPerPixel],
+                        ['亮度', allTags.BrightnessValue],
+                        ['曝光补偿', allTags.ExposureBias],
+                        ['最大光圈', allTags.MaxApertureValue],
+                        ['测光方式', allTags.MeteringMode],
+                        ['光源', allTags.LightSource],
+                        ['闪光灯', allTags.Flash],
+                        ['焦距', allTags.FocalLength],
+                        ['Flash Pix版本', allTags.FlashPixVersion],
+                        ['色域/色彩空间', allTags.ColorSpace],
+                        ['图像的有效宽度', allTags.PixelXDimension],
+                        ['图像的有效高度', allTags.PixelYDimension],
+                        ['源文件', allTags.FileSource],
+                        ['场景类型', allTags.SceneType],
+                        ['自定义图像处理', allTags.CustomRendered],
+                        ['曝光模式', allTags.ExposureMode],
+                        ['白平衡', allTags.WhiteBalance],
+                        ['数字变焦', allTags.DigitalZoomRation],
+                        ['35mm胶片焦距', allTags.FocalLengthIn35mmFilm],
+                        ['场景拍摄类型', allTags.SceneCaptureType],
+                        ['对比度', allTags.Contrast],
+                        ['饱合度', allTags.Saturation],
+                        ['锐度', allTags.Sharpness],
+                    ];
+                    for (let item of data) {
+                        if (typeof item[1] === "string") {
+                            item[1] = item[1].trim();
+                        }
+                    }
+                    for (let item of data) {
+                        let template = $('#row_template').html();
+                        template = template.replace('{attr}', item[0]);
+                        template = template.replace('{value}', item[1]);
+                        let remark = '';
+                        if (item.length === 3) {
+                            remark = item[2]
+                        }
+                        template = template.replace('{remark}', remark)
+                        $('#tbody').append(template);
+                    }
+                });
+            }
+        })
+    })
+</script>
+{% endblock %}

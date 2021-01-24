@@ -1,0 +1,39 @@
+{% extends '../layout.html' %}
+{% block title %}Tool{% endblock %}
+{% block style %}
+{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-12 mx-auto">
+            {% for funcGroup in funcGroups %}
+            <div class="card mt-2 mb-3">
+                <div class="card-body">
+                    <div class="h4">{{ funcGroup.Name }}</div>
+                    <hr>
+                    <div class="row">
+                        {% for singleFunc in funcGroup.Data %}
+                        <div class="col-sm-12 col-md-6 col-lg-4">
+                            <div class="card my-2 hover">
+                                <div class="card-body">
+                                    <h5>{{ singleFunc.Name }}</h5>
+                                    <a href="{{ singleFunc.Path }}" class="btn btn-primary">使用</a>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block script %}
+{% endblock %}
+{% block javascript %}
+<script>
+</script>
+{% endblock %}
+

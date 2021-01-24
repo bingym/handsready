@@ -1,0 +1,29 @@
+{% extends '../layout.html' %}
+{% block title %}字节统计{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-10 mx-auto">
+            <h3 class="h3">字节统计</h3>
+            <hr>
+            <textarea id="text" rows="20" class="form-control"></textarea>
+            <p>
+                共<span id="count" class="text-success"></span>&nbsp;字节
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block script %}
+<script src="/static/js/axios.min.js"></script>
+{% endblock %}
+{% block javascript %}
+<script>
+    function getByteCount(str) {
+        return new Blob([str]).size
+    }
+    document.querySelector('#text').oninput = function () {
+        document.querySelector('#count').innerText = getByteCount(this.value);
+    }
+</script>
+{% endblock %}

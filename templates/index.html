@@ -1,0 +1,61 @@
+{% extends 'layout.html' %}
+{% block title %}Home{% endblock %}
+{% block style %}
+<style>
+    .cell-row {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+    }
+
+    .cell {
+        display: flex;
+        flex: 1;
+        padding-bottom: 3%;
+        width: 3%;
+        border: 1px solid #333333;
+        border-right: none;
+        border-bottom: none;
+    }
+</style>
+{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12 col-md-10 col-lg-12 mx-auto">
+            <div class="card mt-2">
+                <div class="card-header">
+                    Life Progress
+                </div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <label for="birth">生日</label>
+                        <input type="date" value="1995-01-09" id="birth" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <p>自出生至今已过去了<span id="durationMonths" style="color:green">
+                                0</span>个月
+                            <span id="durationYears">0</span>年
+                        </p>
+                        <p>
+                            按900个月75年计算，至今已经度过了大约<span id="percent" style="color: green">0%</span>
+                        </p>
+                        <div class="progress">
+                            <div class="progress-bar bg-success" id="progress"></div>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary" id="draw">绘制</button>
+                    <div class="form-group">
+                        <div id="cells" class="mt-3"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block script %}
+<script src="/static/js/moment.min.js"></script>
+<script src="/static/js/progress.js"></script>
+{% endblock %}

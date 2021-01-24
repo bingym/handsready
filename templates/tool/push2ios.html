@@ -1,0 +1,43 @@
+{% extends '../layout.html' %}
+{% block title %}推送消息到iOS{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-10 mx-auto">
+            <div class="card">
+                <div class="card-header">
+                    推送消息到iOS
+                </div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <textarea id="body" cols="30" rows="10" placeholder="消息内容" class="form-control"></textarea>
+                    </div>
+                    <button type="button" class="btn btn-primary" id="go">发送</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block javascript %}
+<script>
+    document.querySelector('#go').onclick = () => {
+        const oBody = document.querySelector('#body');
+        const bodyValue = oBody.value;
+        const key = "74STGk4HK6hqSRYgLvUm94";
+        const oGo = document.querySelector('#go');
+        if (bodyValue) {
+            console.log(bodyValue);
+            oGo.setAttribute('disabled', true);
+            axios.post('/api/v1/tool/push2ios', {
+                body: bodyValue, key
+            }).then((resp) => {
+                alert('发送成功, 目标对象手机已收到消息推送');
+            }).catch(err => {
+                alert('发送失败');
+            });
+            oGo.removeAttribute('disabled');
+        }
+    }
+</script>
+{% endblock %}

@@ -1,0 +1,61 @@
+{% extends '../layout.html' %}
+{% block title %}Base64在线编码解码{% endblock %}
+{% block description %}在线base64编码解码,在线base64加密解密{% endblock %}
+{% block keywords %}在线base64,在线base64编解码,在线base64加密,在线base64解密,在线base64加解密{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-10 mx-auto">
+            <h3 class="h3">Base64编解码</h3>
+            <hr>
+            <div class="form-group">
+                <textarea id="left" cols="30" rows="10" class="form-control" placeholder="要编码的内容"
+                    name="value"></textarea>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-primary" id="encode">编码↓</button>
+                <input type="file" id="file">
+                <button class="btn btn-primary float-right" id="decode">解码↑</button>
+            </div>
+            <div class="form-group">
+                <textarea id="right" cols="30" rows="10" class="form-control" placeholder="要解码的内容"
+                    name="value"></textarea>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block javascript %}
+<script>
+    $(function () {
+        const oLeft = document.querySelector("#left");
+        const oRight = document.querySelector("#right");
+        const oEncodeBtn = document.querySelector("#encode");
+        const oDecodeBtn = document.querySelector("#decode");
+        const oFile = document.querySelector("#file");
+        oEncodeBtn.onclick = function () {
+            let value = left.value;
+            value = unescape(encodeURIComponent(value));
+            oRight.value = window.btoa(value);
+        }
+        oDecodeBtn.onclick = function () {
+            try {
+                let value = oRight.value;
+                value = escape(window.atob(value));
+                value = decodeURIComponent(value);
+                oLeft.value = value;
+            } catch (e) {
+                alert('不合法的值');
+            }
+        }
+        oFile.onchange = function () {
+            const file = this.files[0];
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = function () {
+                right.value = this.result;
+            }
+        }
+    });
+</script>
+{% endblock %}

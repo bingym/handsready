@@ -1,0 +1,37 @@
+{% extends '../layout.html' %}
+{% block title %}sql格式化{% endblock %}
+{% block description %}在线SQL格式化{% endblock %}
+{% block keywords %}SQL在线格式化,SQL工具{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-10 mx-auto">
+            <h3 class="h3">SQL格式化</h3>
+            <hr>
+            <div class="form-group">
+                <textarea id="left" cols="30" rows="10" class="form-control" placeholder="需要格式化的SQL"></textarea>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-primary" id="format">格式化↓</button>
+            </div>
+            <div class="form-group">
+                <textarea id="right" cols="30" rows="10" class="form-control" placeholder="格式化后的SQL"></textarea>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block script %}
+<script src="/static/js/develop/sql_formatter.js"></script>
+{% endblock %}
+{% block javascript %}
+<script>
+    $(function () {
+        $('#format').click(function(){
+            const sql = $('#left').val().trim();
+            const content = sqlFormatter.format(sql, {});
+            $('#right').val(content);
+        });
+    });
+</script>
+{% endblock %}

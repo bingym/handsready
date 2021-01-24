@@ -1,0 +1,74 @@
+html {
+    height: 100%;
+}
+
+body {
+    font-family: 'Helvetica Neue', Helvetica, 'PingFang SC', 'Microsoft Yahei', 'WenQuanYi Micro Hei', Arial, Verdana, sans-serif;
+    min-height: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+nav {
+    flex: 0 0 auto;
+}
+
+.footer {
+    flex: 0 0 auto;
+}
+
+.container {
+    flex: 1 0 auto;
+}
+
+li {
+    list-style: none;
+}
+
+p {
+    text-indent: 2rem;
+    line-height: 2rem;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+.footer a {
+    color: #000;
+}
+
+.footer p {
+    color: #000;
+}
+
+textarea {
+    resize: none;
+}
+
+.shadow {
+    box-shadow: 0 0 0.6rem #cccccc;
+}
+
+.hover {
+    transition: all .3s;
+}
+
+.hover:hover {
+    transition: all .3s;
+    transform: translateY(-.4rem);
+    box-shadow: 0 .6rem .6rem #cccccc;
+}
+
+.bg-purple {
+    background-color: rgb(160, 107, 198) !important;
+}
+
+.pointer {
+    cursor: pointer;
+}

@@ -1,0 +1,81 @@
+{% extends '../layout.html' %}
+{% block title %}时间戳_在线工具{% endblock %}
+{% block description %}Unix时间戳转换,Unix时间转成北京时间,timestamp{% endblock %}
+{% block keywords %}Unix时间戳转换,在线时间戳转换工具,在线时间戳工具,timestamp{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-10 mx-auto">
+            <h3 class="h3">时间戳</h3>
+            <hr>
+            <div class="card">
+                <div class="card-header">
+                    当前时间
+                </div>
+                <div class="card-body">
+                    <p>当前时间：<span id="currentTime"></span></p>
+                    <p>当前时间戳(秒)：<span id="currentTimestampS"></span></p>
+                    <p>当前时间戳(毫秒)：<span id="currentTimestampM"></span></p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">时间戳转时间</div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <label for="timestamp">时间戳</label>
+                        <input type="text" class="form-control" placeholder="输入时间戳" id="timestamp">
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-primary" id="convertTimestamp">转换</button>
+                    </div>
+                    <div class="form-group">
+                        <label for="time">转换后的时间</label>
+                        <input type="text" class="form-control" placeholder="转换后的时间" id="time">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block javascript %}
+<script>
+    function getCurrentTimestampM() {
+        // 毫秒
+        return new Date().getTime();
+    }
+
+    function getCurrentTimestampS() {
+        // 秒
+        return Math.round(new Date().getTime() / 1000)
+    }
+
+    function getCurrentTime() {
+        // 时间
+        let date = new Date();
+        return date.toLocaleString();
+    }
+
+    function setCurrentTime() {
+        $('#currentTimestampM').text(getCurrentTimestampM());
+        $('#currentTimestampS').text(getCurrentTimestampS());
+        $('#currentTime').text(getCurrentTime());
+    }
+
+    $(function () {
+        setCurrentTime();
+        setInterval(function () {
+            setCurrentTime();
+        }, 1000);
+        $('#convertTimestamp').click(function () {
+            let timestamp = $('#timestamp').val();
+            if (timestamp.length === 13) {
+                timestamp = parseInt(timestamp)
+            } else if (timestamp.length === 10) {
+                timestamp = parseInt(timestamp) * 1000;
+            }
+            $('#time').val(new Date(timestamp).toLocaleString());
+        });
+    })
+</script>
+{% endblock %}

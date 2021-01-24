@@ -1,0 +1,48 @@
+{% extends '../layout.html' %}
+{% block title %}unicode/中文转换{% endblock %}
+{% block description %}本工具是Unicode编码转换，为您提供ASCII与Unicode互转，Unicode与中文互转，在文本框里输入要转换的内容，然后点击要转换的类型按钮，转换完成后即可看到对应的内容。{% endblock %}
+{% block keywords %}Unicode编码转换,Unicode转ASCII,ASCII转Unicode,中文转Unicode,Unicode转中文{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-10 mx-auto">
+            <h3 class="h3">Unicode/中文转换</h3>
+            <hr>
+            <div class="form-group">
+                    <textarea id="left" cols="30" rows="10" class="form-control" placeholder="unicode"
+                              name="value"></textarea>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-primary" id="toZh">转中文↓</button>
+                <button class="btn btn-primary float-right" id="toUnicode">转unicode↑</button>
+            </div>
+            <div class="form-group">
+                    <textarea id="right" cols="30" rows="10" class="form-control" placeholder="中文"
+                              name="value"></textarea>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block javascript %}
+<script>
+    $(function () {
+        function toUnicode(s) {
+            return escape(s).replace(/%/g,"\\").toLowerCase();
+        }
+
+        function toZh(uni) {
+            return unescape(uni.replace(/\\u/g, '%u'))
+        }
+
+        $('#toZh').click(function () {
+            let uni = $('#left').val();
+            $('#right').val(toZh(uni));
+        });
+        $('#toUnicode').click(function () {
+            let s = $('#right').val();
+            $('#left').val(toUnicode(s));
+        });
+    })
+</script>
+{% endblock %}

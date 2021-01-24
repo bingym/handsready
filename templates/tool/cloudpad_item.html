@@ -1,0 +1,79 @@
+{% extends '../layout.html' %}
+{% block title %}CloudPad{% endblock %}
+{% block description %}CloudPad{% endblock %}
+{% block keywords %}CloudPad{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-10 mx-auto">
+            <div class="alert alert-success" role="alert" style="display: none" id="success-alert"></div>
+            <div class="alert alert-danger" role="alert" style="display: none" id="danger-alert"></div>
+            <span class="h3">CloudPad</span> - <span id="key"></span>
+            <span class="float-right">
+            <button class="btn btn-sm btn-primary" id="fetch">↓</button>
+            <button class="btn btn-sm btn-primary" id="upload">↑</button>
+            </span>
+            <hr>
+            <textarea class="form-control" rows="30" id="content"></textarea>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block script %}
+{% endblock %}
+{% block javascript %}
+<script>
+    const oContent = document.querySelector('#content');
+    const oFetch = document.querySelector('#fetch');
+    const oUpload = document.querySelector('#upload');
+    const oSuccessAlert = document.querySelector('#success-alert');
+    const oDangerAlert = document.querySelector('#danger-alert');
+
+    function showDangerAlert(err) {
+        oDangerAlert.innerText = `更新失败, 原因: ${err}`;
+        oDangerAlert.style.display = 'block';
+        oSuccessAlert.style.display = 'none';
+    }
+
+    function showSuccessAlert() {
+        oSuccessAlert.innerText = `更新成功, 时间: ${new Date().toLocaleString()}`;
+        oSuccessAlert.style.display = 'block';
+        oDangerAlert.style.display = 'none';
+    }
+
+    function update(key, content) {
+        axios.post(`/api/v1/tool/cloudpad/${key}`, {content}).then(resp => {
+            alert('推送成功');
+            showSuccessAlert();
+        }).catch(err => {
+            showDangerAlert(err)
+        })
+    }
+
+    function fetch(key) {
+        axios.get(`/api/v1/tool/cloudpad/${key}`).then(resp => {
+            oContent.value = resp.data.data.content;
+            alert('拉取成功');
+            showSuccessAlert();
+        }).catch(err => {
+            showDangerAlert(err);
+        })
+    }
+
+
+    window.onload = () => {
+        const href = window.location.href;
+        const key = href.split('/').pop();
+        document.querySelector('#key').innerText = key;
+        fetch(key);
+
+        oFetch.onclick = function () {
+            fetch(key);
+        };
+        oUpload.onclick = function () {
+            const content = oContent.value;
+            update(key, content)
+        }
+    }
+</script>
+{% endblock %}
