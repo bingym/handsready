@@ -3,11 +3,12 @@ package main
 import (
 	"errors"
 	"fmt"
-	"github.com/bingym/threestories/config"
-	"github.com/bingym/threestories/routes"
+	"log"
+
+	"github.com/bingym/collects_next/config"
+	"github.com/bingym/collects_next/routes"
 	"github.com/gin-gonic/gin"
 	"github.com/go-ini/ini"
-	"log"
 )
 
 func main() {

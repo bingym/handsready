@@ -1,8 +1,8 @@
 package page
 
 import (
-	"github.com/bingym/threestories/constant"
-	"github.com/bingym/threestories/kits/retKit"
+	"github.com/bingym/collects_next/constant"
+	"github.com/bingym/collects_next/kits/retKit"
 	"github.com/gin-gonic/gin"
 )
 

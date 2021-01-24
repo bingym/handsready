@@ -1,7 +1,7 @@
 package page
 
 import (
-	"github.com/bingym/threestories/kits/retKit"
+	"github.com/bingym/collects_next/kits/retKit"
 	"github.com/gin-gonic/gin"
 )
 

@@ -1,7 +1,7 @@
 package routes
 
 import (
-	"github.com/bingym/threestories/controllers"
+	"github.com/bingym/collects_next/controllers"
 	"github.com/gin-gonic/gin"
 )
 

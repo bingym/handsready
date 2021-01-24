@@ -2,17 +2,18 @@ package routes
 
 import (
 	"errors"
-	"github.com/bingym/threestories/config"
-	"github.com/bingym/threestories/controllers/api"
-	"github.com/bingym/threestories/controllers/page"
-	"github.com/bingym/threestories/kits/retKit"
-	"github.com/bingym/threestories/kits/timeKit"
+	"net/http"
+	"time"
+
+	"github.com/bingym/collects_next/config"
+	"github.com/bingym/collects_next/controllers/api"
+	"github.com/bingym/collects_next/controllers/page"
+	"github.com/bingym/collects_next/kits/retKit"
+	"github.com/bingym/collects_next/kits/timeKit"
 	"github.com/flosch/pongo2"
 	"github.com/gin-contrib/sessions"
 	"github.com/gin-gonic/gin"
 	"gitlab.com/go-box/pongo2gin"
-	"net/http"
-	"time"
 )
 
 func CreateRouter() *gin.Engine {

@@ -1,4 +1,4 @@
-module github.com/bingym/threestories
+module github.com/bingym/collects_next
 
 go 1.12
 

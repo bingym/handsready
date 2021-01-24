@@ -1,7 +1,7 @@
 package page
 
 import (
-	"github.com/bingym/threestories/kits/retKit"
+	"github.com/bingym/collects_next/kits/retKit"
 	"github.com/gin-gonic/gin"
 )
 
@@ -50,7 +50,6 @@ func ToolIndexCtl(c *gin.Context) {
 				{Name: "二维码", Path: "/tool/qrcode"},
 				{Name: "随机密码生成", Path: "/tool/random-chars"},
 				{Name: "文本对比", Path: "/tool/text-diff"},
-				{Name: "CloudPad", Path: "/tool/cloudpad"},
 			},
 		},
 	}
