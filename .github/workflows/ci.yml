@@ -15,4 +15,4 @@ jobs:
         username: ${{ secrets.USERNAME }}
         key: ${{ secrets.KEY }}
         port: ${{ secrets.PORT }}
-        script: cd repo/taiyuan && git pull -r && docker-compose up --build -d && docker ps
+        script: cd repo/taiyuan && git pull -r && docker-compose up --build -d && docker rmi $(docker images -f "dangling=true" -q) && docker ps
