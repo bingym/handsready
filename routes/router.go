@@ -5,15 +5,12 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/bingym/collects_next/config"
-	"github.com/bingym/collects_next/controllers/api"
-	"github.com/bingym/collects_next/controllers/page"
-	"github.com/bingym/collects_next/kits/retKit"
-	"github.com/bingym/collects_next/kits/timeKit"
 	"github.com/flosch/pongo2"
-	"github.com/gin-contrib/sessions"
 	"github.com/gin-gonic/gin"
 	"gitlab.com/go-box/pongo2gin"
+	"taiyuan/controllers/api"
+	"taiyuan/controllers/page"
+	"taiyuan/kits/timeKit"
 )
 
 func CreateRouter() *gin.Engine {
@@ -22,48 +19,6 @@ func CreateRouter() *gin.Engine {
 	serveStatic(e)
 	addUrlRule(e)
 	return e
-}
-
-func freshSessionTime(c *gin.Context) {
-	sessionValue, _ := c.Cookie("session")
-	maxAge, _ := config.Config.Section("cookie").Key("max_age").Int()
-	c.SetCookie("session", sessionValue, maxAge, "/", "", false, true)
-}
-
-func authRequired(c *gin.Context) {
-	var (
-		session sessions.Session
-		userID  interface{}
-	)
-	session = sessions.Default(c)
-	userID = session.Get("userID")
-	if userID != nil {
-		c.Set("userID", userID)
-		freshSessionTime(c)
-		c.Next()
-	} else {
-		retKit.APIUnauthorized(c)
-		c.Abort()
-		return
-	}
-}
-
-func pageAuthRequired(c *gin.Context) {
-	var (
-		session sessions.Session
-		userID  interface{}
-	)
-	session = sessions.Default(c)
-	userID = session.Get("userID")
-	if userID != nil {
-		c.Set("userID", userID)
-		freshSessionTime(c)
-		c.Next()
-	} else {
-		retKit.HTMLUnauthorized(c)
-		c.Abort()
-		return
-	}
 }
 
 func serveStatic(e *gin.Engine) {

@@ -1,13 +1,13 @@
 package page
 
 import (
-	"github.com/bingym/collects_next/constant"
-	"github.com/bingym/collects_next/kits/retKit"
 	"github.com/gin-gonic/gin"
+	"taiyuan/constant"
+	"taiyuan/kits/retKit"
 )
 
 func IndexCtl(c *gin.Context) {
-	retKit.HTMLData(c, "index.html", map[string]interface{}{})
+	retKit.Redirect(c, "/tool")
 }
 
 func AboutCtl(c *gin.Context) {

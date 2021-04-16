@@ -1,7 +1,7 @@
 package routes
 
 import (
-	"github.com/bingym/collects_next/controllers"
+	"taiyuan/controllers"
 	"github.com/gin-gonic/gin"
 )
 

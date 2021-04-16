@@ -1,9 +1,5 @@
 package pagination
 
-import (
-	"github.com/jinzhu/gorm"
-)
-
 type paginator interface {
 	Pages() int
 	HasPrev() bool
@@ -63,18 +59,4 @@ func (p *SimplePaginator) PaginateRet() map[string]interface{} {
 		"next_num": p.NextNum(),
 		"page":     p.Page,
 	}
-}
-
-func NewPaginator(query *gorm.DB, currentPage int, data interface{}, perPage int) (*SimplePaginator, error) {
-	var total int
-	if err := query.Offset(
-		(currentPage - 1) * perPage).Limit(perPage).Find(data).Offset(-1).Limit(-1).Count(&total).Error; err != nil {
-		return nil, err
-	}
-	return &SimplePaginator{
-		Total:             total,
-		Page:              currentPage,
-		PaginationPerPage: perPage,
-		Data:              data,
-	}, nil
 }

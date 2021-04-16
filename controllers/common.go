@@ -3,8 +3,8 @@ package controllers
 import (
 	"strings"
 
-	"github.com/bingym/collects_next/kits/retKit"
 	"github.com/gin-gonic/gin"
+	"taiyuan/kits/retKit"
 )
 
 func NoRoute(c *gin.Context) {

@@ -1,8 +1,8 @@
 package page
 
 import (
-	"github.com/bingym/collects_next/kits/retKit"
 	"github.com/gin-gonic/gin"
+	"taiyuan/kits/retKit"
 )
 
 func getToolBaseRet() map[string]interface{} {

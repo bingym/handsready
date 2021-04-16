@@ -5,10 +5,10 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/bingym/collects_next/config"
-	"github.com/bingym/collects_next/routes"
 	"github.com/gin-gonic/gin"
 	"github.com/go-ini/ini"
+	"taiyuan/config"
+	"taiyuan/routes"
 )
 
 func main() {
