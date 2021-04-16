@@ -1,7 +1,6 @@
 version: '3'
 services:
   webapp:
-    container_name: taiyuan_web
     build:
       context: .
       dockerfile: Dockerfile
