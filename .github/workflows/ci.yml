@@ -16,3 +16,9 @@ jobs:
         key: ${{ secrets.KEY }}
         port: ${{ secrets.PORT }}
         script: cd repo/taiyuan && git pull -r && docker-compose up --build -d && docker rmi $(docker images -f "dangling=true" -q) && docker ps
+    - name: Bark notify
+      uses: shink/bark-action@v1
+      with:
+        key: ${{ secrets.BARK_KEY }}
+        title: 部署通知
+        body: taiyuan部署成功
