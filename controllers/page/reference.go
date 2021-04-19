@@ -53,6 +53,14 @@ func ReferenceIndexCtl(c *gin.Context) {
 			},
 		},
 		{
+			Name: "生活",
+			Data: []LinkSubGroup{
+				{Name: "生活", Links: []Link{
+					{Title: "全国车牌大全", URL: "/reference/carno"},
+				}},
+			},
+		},
+		{
 			Name: "站长",
 			Data: []LinkSubGroup{
 				{Name: "域名", Links: []Link{
@@ -137,6 +145,10 @@ func SourceCtl(c *gin.Context) {
 
 func DomainCtl(c *gin.Context) {
 	retKit.HTMLData(c, "reference/domain.html", getReferenceBaseRet())
+}
+
+func CarnoCtl(c *gin.Context) {
+	retKit.HTMLData(c, "reference/carno.html", getReferenceBaseRet())
 }
 
 func HttpcodeCtl(c *gin.Context) {

@@ -96,5 +96,6 @@ func addPageRoutes(e *gin.Engine) {
 		group.GET("/reference/http-mark", page.HtmlMarkCtl)
 		group.GET("/reference/source", page.SourceCtl)
 		group.GET("/reference/domain", page.DomainCtl)
+		group.GET("/reference/carno", page.CarnoCtl)
 	}
 }
