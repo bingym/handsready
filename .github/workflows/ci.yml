@@ -21,13 +21,13 @@ jobs:
       with:
         key: ${{ secrets.BARK_KEY }}
         title: 部署通知
-        body: ${{ GITHUB_REPOSITORY }}[${{ GITHUB_SHA }}]部署成功
+        body: $GITHUB_REPOSITORY[$GITHUB_SHA]部署成功
       if: ${{ success() }}
     - name: Failed Bark notify
       uses: shink/bark-action@v1
       with:
         key: ${{ secrets.BARK_KEY }}
         title: 部署通知
-        body: ${{ GITHUB_REPOSITORY }}[${{ GITHUB_SHA }}]部署失败
+        body: $GITHUB_REPOSITORY[$GITHUB_SHA]部署失败
       if: ${{ failure() }}
 
