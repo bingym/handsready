@@ -12,7 +12,7 @@
                     <h4>{{ linkSubGroup.Name }}</h4>
                     <div class="link-data">
                         {% for link in linkSubGroup.Links %}
-                        <a href="{{link.URL}}">{{link.Title}}</a><span> | </span>
+                        <a {% if link.URL|slice:":1" == '/'%}class="text-danger" target="_self"{% else %}target="_blank"{% endif %} href="{{link.URL}}">{{link.Title}}</a><span> | </span>
                         {% endfor %}
                     </div>
                     <hr>

@@ -52,6 +52,14 @@ func ReferenceIndexCtl(c *gin.Context) {
 				}},
 			},
 		},
+		{
+			Name: "站长",
+			Data: []LinkSubGroup{
+				{Name: "域名", Links: []Link{
+					{Title: "域名大全", URL: "/reference/domain"},
+				}},
+			},
+		},
 	}
 	ret := getReferenceBaseRet()
 	ret["linkGroups"] = linkGroups
@@ -124,17 +132,21 @@ func EbookCtl(c *gin.Context) {
 }
 
 func SourceCtl(c *gin.Context) {
-	retKit.HTMLData(c, "reference/source.html", getToolBaseRet())
+	retKit.HTMLData(c, "reference/source.html", getReferenceBaseRet())
+}
+
+func DomainCtl(c *gin.Context) {
+	retKit.HTMLData(c, "reference/domain.html", getReferenceBaseRet())
 }
 
 func HttpcodeCtl(c *gin.Context) {
-	retKit.HTMLData(c, "reference/http_code.html", getToolBaseRet())
+	retKit.HTMLData(c, "reference/http_code.html", getReferenceBaseRet())
 }
 
 func HtmlMarkCtl(c *gin.Context) {
-	retKit.HTMLData(c, "reference/html_mark.html", getToolBaseRet())
+	retKit.HTMLData(c, "reference/html_mark.html", getReferenceBaseRet())
 }
 
 func TimeFormatPlaceholderCtl(c *gin.Context) {
-	retKit.HTMLData(c, "reference/time_format_placeholder.html", getToolBaseRet())
+	retKit.HTMLData(c, "reference/time_format_placeholder.html", getReferenceBaseRet())
 }

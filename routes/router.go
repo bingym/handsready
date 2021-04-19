@@ -95,6 +95,6 @@ func addPageRoutes(e *gin.Engine) {
 		group.GET("/reference/time-format-placeholder", page.TimeFormatPlaceholderCtl)
 		group.GET("/reference/http-mark", page.HtmlMarkCtl)
 		group.GET("/reference/source", page.SourceCtl)
-
+		group.GET("/reference/domain", page.DomainCtl)
 	}
 }
