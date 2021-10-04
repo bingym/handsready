@@ -18,6 +18,7 @@ func ReferenceIndexCtl(c *gin.Context) {
 			Data: []LinkSubGroup{
 				{Name: "技术博客", Links: []Link{
 					{Title: "美团技术博客", URL: "https://tech.meituan.com/"},
+					{Title: "小米信息部技术团队", URL: "https://xiaomi-info.github.io/"},
 				}},
 				{Name: "代码规范", Links: []Link{
 					{Title: "Google开源项目指南", URL: "https://zh-google-styleguide.readthedocs.io/en/latest/"},
