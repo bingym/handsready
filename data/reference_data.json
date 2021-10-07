@@ -1,0 +1,165 @@
+[
+  {
+    "name": "开发",
+    "data": [
+      {
+        "name": "文档/手册",
+        "links": [
+          {
+            "title": "Go标准库中文文档",
+            "url": "https://studygolang.com/pkgdoc"
+          },
+          {
+            "title": "PostgreSQL 10.1 手册",
+            "url": "http://www.postgres.cn/docs/10/index.html"
+          },
+          {
+            "title": "MDN",
+            "url": "https://developer.mozilla.org/zh-CN/docs/Web"
+          },
+          {
+            "title": "Vue.js",
+            "url": "https://cn.vuejs.org/v2/guide/"
+          },
+          {
+            "title": "Bootstrap4中文文档",
+            "url": "https://code.z01.com/v4/docs/"
+          },
+          {
+            "title": "Moment.js中文文档",
+            "url": "http://momentjs.cn/"
+          }
+        ]
+      },
+      {
+        "name": "技术博客",
+        "links": [
+          {
+            "title": "美团技术博客",
+            "url": "https://tech.meituan.com/"
+          },
+          {
+            "title": "小米信息部技术团队",
+            "url": "https://xiaomi-info.github.io/"
+          }
+        ]
+      },
+      {
+        "name": "书籍/资料",
+        "links": [
+          {
+            "title": "设计数据密集型应用(DDIA)",
+            "url": "https://vonng.gitbooks.io/ddia-cn/content/"
+          },
+          {
+            "title": "Linux C编程一站式学习",
+            "url": "http://docs.linuxtone.org/ebooks/C&CPP/c/index.html"
+          },
+          {
+            "title": "《Effective Go》中英双语版",
+            "url": "https://bingohuang.gitbooks.io/effective-go-zh-en/content/"
+          },
+          {
+            "title": "GO语言高级编程",
+            "url": "https://chai2010.cn/advanced-go-programming-book/"
+          },
+          {
+            "title": "Go101",
+            "url": "https://gfw.go101.org/article/101.html"
+          },
+          {
+            "title": "Go语言入门指南",
+            "url": "https://github.com/unknwon/the-way-to-go_ZH_CN/blob/master/eBook/directory.md"
+          },
+          {
+            "title": "Golang修养之路",
+            "url": "https://github.com/aceld/golang"
+          },
+          {
+            "title": "Python Cookbook",
+            "url": "https://python3-cookbook.readthedocs.io/zh_CN/latest/preface.html"
+          },
+          {
+            "title": "Effective Python",
+            "url": "https://guoruibiao.gitbooks.io/effective-python/content/"
+          },
+          {
+            "title": "Python数据结构和算法",
+            "url": "https://xidianwlc.gitbooks.io/python-data-structrue-and-algrothms/content/"
+          },
+          {
+            "title": "Python并行编程",
+            "url": "https://python-parallel-programmning-cookbook.readthedocs.io/zh_CN/latest/index.html"
+          }
+        ]
+      },
+      {
+        "name": "代码规范",
+        "links": [
+          {
+            "title": "Google开源项目指南",
+            "url": "https://zh-google-styleguide.readthedocs.io/en/latest/"
+          },
+          {
+            "title": "Uber Go风格指南",
+            "url": "https://github.com/xxjwxc/uber_go_guide_cn"
+          },
+          {
+            "title": "PEP8",
+            "url": " https://www.python.org/dev/peps/pep-008/"
+          }
+        ]
+      },
+      {
+        "name": "Web前端",
+        "links": [
+          {
+            "title": "HTML转义字符",
+            "url": "/reference/http-mark"
+          }
+        ]
+      },
+      {
+        "name": "服务器开发",
+        "links": [
+          {
+            "title": "时间格式化占位符",
+            "url": "/reference/time-format-placeholder"
+          },
+          {
+            "title": "镜像源",
+            "url": "/reference/source"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "生活",
+    "data": [
+      {
+        "name": "生活",
+        "links": [
+          {
+            "title": "全国车牌大全",
+            "url": "/reference/carno"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "站长",
+    "data": [
+      {
+        "name": "域名",
+        "links": [
+          {
+            "title": "域名大全",
+            "url": "/reference/domain"
+          }
+        ]
+      }
+    ]
+  }
+]

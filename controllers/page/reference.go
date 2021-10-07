@@ -1,9 +1,33 @@
 package page
 
 import (
+	"encoding/json"
 	"github.com/gin-gonic/gin"
+	"io/ioutil"
+	"os"
 	"taiyuan/kits/retKit"
 )
+
+var referenceData []LinkGroup
+
+func init() {
+	loadReferenceData()
+}
+
+func loadReferenceData() {
+	file, err := os.Open("./data/reference_data.json")
+	defer file.Close()
+	if err != nil {
+		panic("read reference_data.json failed!")
+	}
+	content, err := ioutil.ReadAll(file)
+	if err != nil{
+		panic("read reference_data.json failed!")
+	}
+	if err := json.Unmarshal(content, &referenceData); err != nil{
+		panic("json unmarshal reference_data.json failed, please check file!")
+	}
+}
 
 func getReferenceBaseRet() map[string]interface{} {
 	return map[string]interface{}{
@@ -12,69 +36,8 @@ func getReferenceBaseRet() map[string]interface{} {
 }
 
 func ReferenceIndexCtl(c *gin.Context) {
-	linkGroups := []LinkGroup{
-		{
-			Name: "开发",
-			Data: []LinkSubGroup{
-				{Name: "技术博客", Links: []Link{
-					{Title: "美团技术博客", URL: "https://tech.meituan.com/"},
-					{Title: "小米信息部技术团队", URL: "https://xiaomi-info.github.io/"},
-				}},
-				{Name: "代码规范", Links: []Link{
-					{Title: "Google开源项目指南", URL: "https://zh-google-styleguide.readthedocs.io/en/latest/"},
-					{Title: "Uber Go风格指南", URL: "https://github.com/xxjwxc/uber_go_guide_cn"},
-					{Title: "PEP8", URL: " https://www.python.org/dev/peps/pep-008/"},
-				}},
-				{Name: "Web前端", Links: []Link{
-					{Title: "MDN", URL: "https://developer.mozilla.org/zh-CN/docs/Web"},
-					{Title: "Vue.js", URL: "https://cn.vuejs.org/v2/guide/"},
-					{Title: "Bootstrap4中文文档", URL: "https://code.z01.com/v4/docs/"},
-					{Title: "Moment.js中文文档", URL: "http://momentjs.cn/"},
-					{Title: "HTML转义字符", URL: "/reference/http-mark"},
-				}},
-				{Name: "服务器开发", Links: []Link{
-					{Title: "设计数据密集型应用", URL: "https://vonng.gitbooks.io/ddia-cn/content/"},
-					{Title: "Linux C编程一站式学习", URL: "http://docs.linuxtone.org/ebooks/C&CPP/c/index.html"},
-					{Title: "时间格式化占位符", URL: "/reference/time-format-placeholder"},
-					{Title: "镜像源", URL: "/reference/source"},
-				}},
-				{Name: "数据库", Links: []Link{
-					{Title: "PostgreSQL 10.1 手册", URL: "http://www.postgres.cn/docs/10/index.html"},
-				}},
-				{Name: "Golang", Links: []Link{
-					{Title: "Go标准库中文文档", URL: "https://studygolang.com/pkgdoc"},
-					{Title: "《Effective Go》中英双语版", URL: "https://bingohuang.gitbooks.io/effective-go-zh-en/content/"},
-					{Title: "Go语言高级编程", URL: "https://chai2010.cn/advanced-go-programming-book/"},
-					{Title: "Go101", URL: "https://gfw.go101.org/article/101.html"},
-					{Title: "Go语言入门指南", URL: "https://github.com/unknwon/the-way-to-go_ZH_CN/blob/master/eBook/directory.md"},
-				}},
-				{Name: "Python", Links: []Link{
-					{Title: "Python Cookbook", URL: "https://python3-cookbook.readthedocs.io/zh_CN/latest/preface.html"},
-					{Title: "Effective Python", URL: "https://guoruibiao.gitbooks.io/effective-python/content/"},
-					{Title: "Python数据结构和算法", URL: "https://xidianwlc.gitbooks.io/python-data-structrue-and-algrothms/content/"},
-					{Title: "Python并行编程", URL: "https://python-parallel-programmning-cookbook.readthedocs.io/zh_CN/latest/index.html"},
-				}},
-			},
-		},
-		{
-			Name: "生活",
-			Data: []LinkSubGroup{
-				{Name: "生活", Links: []Link{
-					{Title: "全国车牌大全", URL: "/reference/carno"},
-				}},
-			},
-		},
-		{
-			Name: "站长",
-			Data: []LinkSubGroup{
-				{Name: "域名", Links: []Link{
-					{Title: "域名大全", URL: "/reference/domain"},
-				}},
-			},
-		},
-	}
 	ret := getReferenceBaseRet()
-	ret["linkGroups"] = linkGroups
+	ret["linkGroups"] = referenceData
 	retKit.HTMLData(c, "reference/index.html", ret)
 
 }
