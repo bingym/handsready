@@ -1,32 +1,14 @@
 package page
 
 import (
-	"encoding/json"
 	"github.com/gin-gonic/gin"
-	"io/ioutil"
-	"os"
 	"taiyuan/kits/retKit"
 )
 
 var referenceData []LinkGroup
 
 func init() {
-	loadReferenceData()
-}
-
-func loadReferenceData() {
-	file, err := os.Open("./data/reference_data.json")
-	defer file.Close()
-	if err != nil {
-		panic("read reference_data.json failed!")
-	}
-	content, err := ioutil.ReadAll(file)
-	if err != nil{
-		panic("read reference_data.json failed!")
-	}
-	if err := json.Unmarshal(content, &referenceData); err != nil{
-		panic("json unmarshal reference_data.json failed, please check file!")
-	}
+	loadDataFile("reference_data.json", &referenceData)
 }
 
 func getReferenceBaseRet() map[string]interface{} {

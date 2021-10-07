@@ -5,6 +5,12 @@ import (
 	"taiyuan/kits/retKit"
 )
 
+var toolData []FuncGroup
+
+func init() {
+	loadDataFile("tool_data.json", &toolData)
+}
+
 func getToolBaseRet() map[string]interface{} {
 	return map[string]interface{}{
 		"column": "tool",
@@ -12,49 +18,8 @@ func getToolBaseRet() map[string]interface{} {
 }
 
 func ToolIndexCtl(c *gin.Context) {
-	funcGroups := []FuncGroup{
-		{
-			"开发",
-			[]SingleFunc{
-				{Name: "JSON格式化", Path: "/tool/json-format"},
-				{Name: "SQL格式化", Path: "/tool/sql-format"},
-				{Name: "时间戳", Path: "/tool/timestamp"},
-				{Name: "MD5", Path: "/tool/md5"},
-				{Name: "Base64编/解码", Path: "/tool/base64"},
-				{Name: "unicode/中文", Path: "/tool/unicode-zh"},
-				{Name: "正则表达式", Path: "/tool/regex"},
-				{Name: "字节计算器", Path: "/tool/byte-calc"},
-				{Name: "UUID", Path: "/tool/uuid"},
-				{Name: "URL编/解码", Path: "/tool/url-encode-decode"},
-				{Name: "字符统计", Path: "/tool/word-count"},
-				{Name: "字节统计", Path: "/tool/byte-count"},
-			},
-		},
-		{
-			"摄影",
-			[]SingleFunc{
-				{
-					Name: "EXIF信息",
-					Path: "/tool/exif-info",
-				},
-				{
-					Name: "索尼微单快门数查询",
-					Path: "/tool/sony-shutters",
-				},
-			},
-		},
-		{
-			"其他",
-			[]SingleFunc{
-				{Name: "推送到iOS", Path: "/tool/push2ios"},
-				{Name: "二维码", Path: "/tool/qrcode"},
-				{Name: "随机密码生成", Path: "/tool/random-chars"},
-				{Name: "文本对比", Path: "/tool/text-diff"},
-			},
-		},
-	}
 	ret := getToolBaseRet()
-	ret["funcGroups"] = funcGroups
+	ret["funcGroups"] = toolData
 	retKit.HTMLData(c, "tool/index.html", ret)
 }
 
