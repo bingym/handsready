@@ -111,3 +111,7 @@ func HtmlMarkCtl(c *gin.Context) {
 func TimeFormatPlaceholderCtl(c *gin.Context) {
 	retKit.HTMLData(c, "reference/time_format_placeholder.html", getReferenceBaseRet())
 }
+
+func AsciiTableCtl(c *gin.Context)  {
+	retKit.HTMLData(c, "reference/ascii_table.html", getReferenceBaseRet())
+}

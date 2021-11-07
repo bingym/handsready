@@ -92,6 +92,7 @@ func addPageRoutes(e *gin.Engine) {
 		group.GET("/reference/github", page.GithubCtl)
 		group.GET("/reference/ebook", page.EbookCtl)
 		group.GET("/reference/http-code", page.HttpcodeCtl)
+		group.GET("/reference/ascii-table", page.AsciiTableCtl)
 		group.GET("/reference/time-format-placeholder", page.TimeFormatPlaceholderCtl)
 		group.GET("/reference/http-mark", page.HtmlMarkCtl)
 		group.GET("/reference/source", page.SourceCtl)
