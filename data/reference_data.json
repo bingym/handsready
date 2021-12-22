@@ -33,6 +33,10 @@
           {
             "title": "Moment.js中文文档",
             "url": "http://momentjs.cn/"
+          },
+          {
+            "title": "Django Admin Cookbook",
+            "url": "https://django-admin-cookbook-cn.readthedocs.io/en/latest/index.html"
           }
         ]
       },
