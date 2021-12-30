@@ -105,6 +105,10 @@
           {
             "title": "Python并行编程",
             "url": "https://python-parallel-programmning-cookbook.readthedocs.io/zh_CN/latest/index.html"
+          },
+          {
+            "title": "Rust程序设计语言",
+            "url": "https://rustwiki.org/zh-CN/book/title-page.html"
           }
         ]
       },
