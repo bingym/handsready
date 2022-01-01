@@ -1,8 +1,11 @@
-[{
+[
+  {
     "name": "开发",
-    "data": [{
+    "data": [
+      {
         "name": "文档/手册",
-        "links": [{
+        "links": [
+          {
             "title": "quickref.me",
             "url": "https://quickref.me/"
           },
@@ -42,7 +45,8 @@
       },
       {
         "name": "技术博客",
-        "links": [{
+        "links": [
+          {
             "title": "美团技术博客",
             "url": "https://tech.meituan.com/"
           },
@@ -58,7 +62,8 @@
       },
       {
         "name": "书籍/资料",
-        "links": [{
+        "links": [
+          {
             "title": "设计数据密集型应用(DDIA)",
             "url": "https://vonng.gitbooks.io/ddia-cn/content/"
           },
@@ -114,7 +119,8 @@
       },
       {
         "name": "代码规范",
-        "links": [{
+        "links": [
+          {
             "title": "Google开源项目指南",
             "url": "https://zh-google-styleguide.readthedocs.io/en/latest/"
           },
@@ -130,14 +136,17 @@
       },
       {
         "name": "Web前端",
-        "links": [{
-          "title": "HTML转义字符",
-          "url": "/reference/http-mark"
-        }]
+        "links": [
+          {
+            "title": "HTML转义字符",
+            "url": "/reference/http-mark"
+          }
+        ]
       },
       {
         "name": "服务器开发",
-        "links": [{
+        "links": [
+          {
             "title": "ASCII码表",
             "url": "/reference/ascii-table"
           },
@@ -154,23 +163,45 @@
     ]
   },
   {
+    "name": "工作",
+    "data": [
+      {
+        "name": "简历",
+        "links": [
+          {
+            "title": "木及简历",
+            "url": "https://www.mujicv.com"
+          }
+        ]
+      }
+    ]
+  },
+  {
     "name": "生活",
-    "data": [{
-      "name": "生活",
-      "links": [{
-        "title": "全国车牌大全",
-        "url": "/reference/carno"
-      }]
-    }]
+    "data": [
+      {
+        "name": "生活",
+        "links": [
+          {
+            "title": "全国车牌大全",
+            "url": "/reference/carno"
+          }
+        ]
+      }
+    ]
   },
   {
     "name": "站长",
-    "data": [{
-      "name": "域名",
-      "links": [{
-        "title": "域名大全",
-        "url": "/reference/domain"
-      }]
-    }]
+    "data": [
+      {
+        "name": "域名",
+        "links": [
+          {
+            "title": "域名大全",
+            "url": "/reference/domain"
+          }
+        ]
+      }
+    ]
   }
 ]
