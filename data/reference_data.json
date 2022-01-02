@@ -1,41 +1,47 @@
 [
   {
-    "name": "开发",
+    "name": "book & handbook",
     "data": [
       {
-        "name": "文档/手册",
+        "name": "Web Development",
         "links": [
           {
-            "title": "quickref.me",
-            "url": "https://quickref.me/"
+            "title": "设计数据密集型应用(DDIA)",
+            "url": "https://vonng.gitbooks.io/ddia-cn/content/"
+          }
+        ]
+      },
+      {
+        "name": "Linux & C",
+        "links": [
+          {
+            "title": "Linux C编程一站式学习",
+            "url": "http://docs.linuxtone.org/ebooks/C&CPP/c/index.html"
           },
           {
             "title": "Linux C API 参考手册",
             "url": "https://wizardforcel.gitbooks.io/linux-c-api-ref/content/index.html"
+          }
+        ]
+      },
+      {
+        "name": "Python",
+        "links": [
+          {
+            "title": "Python Cookbook",
+            "url": "https://python3-cookbook.readthedocs.io/zh_CN/latest/preface.html"
           },
           {
-            "title": "Go标准库中文文档",
-            "url": "https://studygolang.com/pkgdoc"
+            "title": "Effective Python",
+            "url": "https://guoruibiao.gitbooks.io/effective-python/content/"
           },
           {
-            "title": "PostgreSQL 10.1 手册",
-            "url": "http://www.postgres.cn/docs/10/index.html"
+            "title": "Python数据结构和算法",
+            "url": "https://xidianwlc.gitbooks.io/python-data-structrue-and-algrothms/content/"
           },
           {
-            "title": "MDN",
-            "url": "https://developer.mozilla.org/zh-CN/docs/Web"
-          },
-          {
-            "title": "Vue.js",
-            "url": "https://cn.vuejs.org/v2/guide/"
-          },
-          {
-            "title": "Bootstrap4中文文档",
-            "url": "https://code.z01.com/v4/docs/"
-          },
-          {
-            "title": "Moment.js中文文档",
-            "url": "http://momentjs.cn/"
+            "title": "Python并行编程",
+            "url": "https://python-parallel-programmning-cookbook.readthedocs.io/zh_CN/latest/index.html"
           },
           {
             "title": "Django Admin Cookbook",
@@ -44,32 +50,11 @@
         ]
       },
       {
-        "name": "技术博客",
+        "name": "Golang",
         "links": [
           {
-            "title": "美团技术博客",
-            "url": "https://tech.meituan.com/"
-          },
-          {
-            "title": "小米信息部技术团队",
-            "url": "https://xiaomi-info.github.io/"
-          },
-          {
-            "title": "小菜学编程",
-            "url": "https://fasionchan.com/"
-          }
-        ]
-      },
-      {
-        "name": "书籍/资料",
-        "links": [
-          {
-            "title": "设计数据密集型应用(DDIA)",
-            "url": "https://vonng.gitbooks.io/ddia-cn/content/"
-          },
-          {
-            "title": "Linux C编程一站式学习",
-            "url": "http://docs.linuxtone.org/ebooks/C&CPP/c/index.html"
+            "title": "Go标准库中文文档",
+            "url": "https://studygolang.com/pkgdoc"
           },
           {
             "title": "《Effective Go》中英双语版",
@@ -96,24 +81,68 @@
             "url": "https://geektutu.com/post/high-performance-go.html"
           },
           {
-            "title": "Python Cookbook",
-            "url": "https://python3-cookbook.readthedocs.io/zh_CN/latest/preface.html"
-          },
-          {
-            "title": "Effective Python",
-            "url": "https://guoruibiao.gitbooks.io/effective-python/content/"
-          },
-          {
-            "title": "Python数据结构和算法",
-            "url": "https://xidianwlc.gitbooks.io/python-data-structrue-and-algrothms/content/"
-          },
-          {
-            "title": "Python并行编程",
-            "url": "https://python-parallel-programmning-cookbook.readthedocs.io/zh_CN/latest/index.html"
-          },
+            "title": "Go语言设计与实现",
+            "url": "https://draveness.me/golang/"
+          }
+        ]
+      },
+      {
+        "name": "Rust",
+        "links": [
           {
             "title": "Rust程序设计语言",
             "url": "https://rustwiki.org/zh-CN/book/title-page.html"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "开发",
+    "data": [
+      {
+        "name": "文档/手册",
+        "links": [
+          {
+            "title": "quickref.me",
+            "url": "https://quickref.me/"
+          },
+          {
+            "title": "PostgreSQL 10.1 手册",
+            "url": "http://www.postgres.cn/docs/10/index.html"
+          },
+          {
+            "title": "MDN",
+            "url": "https://developer.mozilla.org/zh-CN/docs/Web"
+          },
+          {
+            "title": "Vue.js",
+            "url": "https://cn.vuejs.org/v2/guide/"
+          },
+          {
+            "title": "Bootstrap4中文文档",
+            "url": "https://code.z01.com/v4/docs/"
+          },
+          {
+            "title": "Moment.js中文文档",
+            "url": "http://momentjs.cn/"
+          }
+        ]
+      },
+      {
+        "name": "技术博客",
+        "links": [
+          {
+            "title": "美团技术博客",
+            "url": "https://tech.meituan.com/"
+          },
+          {
+            "title": "小米信息部技术团队",
+            "url": "https://xiaomi-info.github.io/"
+          },
+          {
+            "title": "小菜学编程",
+            "url": "https://fasionchan.com/"
           }
         ]
       },
