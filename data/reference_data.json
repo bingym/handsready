@@ -25,6 +25,15 @@
         ]
       },
       {
+        "name": "Data structure & Algorithm",
+        "links": [
+          {
+            "title": "labuladong的算法小抄",
+            "url": "https://labuladong.github.io/algo/"
+          }
+        ]
+      },
+      {
         "name": "Python",
         "links": [
           {
