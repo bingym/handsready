@@ -4,4 +4,4 @@ COPY . /app
 WORKDIR /app
 RUN go build
 EXPOSE 5200
-ENTRYPOINT ["./boot.sh"]
+ENTRYPOINT ["sh", "boot.sh"]

@@ -4,6 +4,5 @@ services:
     image: registry.cn-hangzhou.aliyuncs.com/bingym/treasure_chest_amd64:latest
     restart: always
     network_mode: host
-    command: "sh boot.sh"
     environment:
       APP_MODE: prod
