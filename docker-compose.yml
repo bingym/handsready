@@ -1,12 +1,9 @@
 version: '3'
 services:
   webapp:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: registry.cn-hangzhou.aliyuncs.com/bingym/treasure_chest_amd64:latest
+    restart: always
+    network_mode: host
+    command: "sh boot.sh"
     environment:
-      - GIN_MODE=release
-    expose:
-      - "5200"
-    ports:
-      - "5200:5200"
+      APP_MODE: prod

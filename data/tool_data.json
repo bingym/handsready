@@ -69,10 +69,6 @@
     "name": "其他",
     "data": [
       {
-        "name": "推送到iOS",
-        "path": "/tool/push2ios"
-      },
-      {
         "name": "二维码",
         "path": "/tool/qrcode"
       },
