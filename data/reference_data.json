@@ -12,7 +12,11 @@
           {
             "title": "设计数据密集型应用(DDIA)",
             "url": "https://vonng.gitbooks.io/ddia-cn/content/"
-          }
+          },
+          {
+            "title": "OpenResty 最佳实践",
+            "url": "https://moonbingbing.gitbooks.io/openresty-best-practices/content/"
+          },
         ]
       },
       {
