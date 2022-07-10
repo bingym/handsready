@@ -141,6 +141,10 @@
             "url": "https://developer.mozilla.org/zh-CN/docs/Web"
           },
           {
+            "title": "Consul 简介和快速入门",
+            "url": "https://book-consul-guide.vnzmi.com/"
+          },
+          {
             "title": "Vue.js",
             "url": "https://cn.vuejs.org/v2/guide/"
           },
