@@ -15,8 +15,7 @@ export const referenceData: LinkGroup[] = [
       {
         Name: 'Linux & C',
         Links: [
-          { Title: 'Linux C编程一站式学习', URL: 'http://docs.linuxtone.org/ebooks/C&CPP/c/index.html' },
-          { Title: 'Linux C API 参考手册', URL: 'https://wizardforcel.gitbooks.io/linux-c-api-ref/content/index.html' },
+          { Title: 'Linux C编程一站式学习', URL: 'https://linux-c-learning-all-in-one.readthedocs.io/zh-cn/latest/' },
           { Title: '阮一峰C语言教程', URL: 'https://wangdoc.com/clang/' },
         ],
       },
@@ -31,7 +30,6 @@ export const referenceData: LinkGroup[] = [
         Links: [
           { Title: 'Python Cookbook', URL: 'https://python3-cookbook.readthedocs.io/zh_CN/latest/preface.html' },
           { Title: 'Effective Python', URL: 'https://guoruibiao.gitbooks.io/effective-python/content/' },
-          { Title: 'Python数据结构和算法', URL: 'https://xidianwlc.gitbooks.io/python-data-structrue-and-algrothms/content/' },
           { Title: 'Python并行编程', URL: 'https://python-parallel-programmning-cookbook.readthedocs.io/zh_CN/latest/index.html' },
           { Title: 'Django Admin Cookbook', URL: 'https://django-admin-cookbook-cn.readthedocs.io/en/latest/index.html' },
         ],
@@ -44,10 +42,9 @@ export const referenceData: LinkGroup[] = [
           { Title: 'GO语言高级编程', URL: 'https://chai2010.cn/advanced-go-programming-book/' },
           { Title: 'Go101', URL: 'https://gfw.go101.org/article/101.html' },
           { Title: 'Go语言入门指南', URL: 'https://github.com/unknwon/the-way-to-go_ZH_CN/blob/master/eBook/directory.md' },
-          { Title: 'Golang修养之路', URL: 'https://github.com/aceld/golang' },
           { Title: 'Go语言高性能编程', URL: 'https://geektutu.com/post/high-performance-go.html' },
           { Title: 'Go语言设计与实现', URL: 'https://draveness.me/golang/' },
-          { Title: 'Golang修养之路', URL: 'https://www.kancloud.cn/aceld/golang/1858955' },
+          { Title: 'Golang修养之路', URL: 'https://www.yuque.com/aceld/golang/ithv8f' },
         ],
       },
       {
@@ -78,7 +75,6 @@ export const referenceData: LinkGroup[] = [
         Links: [
           { Title: '美团技术博客', URL: 'https://tech.meituan.com/' },
           { Title: '小米信息部技术团队', URL: 'https://xiaomi-info.github.io/' },
-          { Title: '小菜学编程', URL: 'https://fasionchan.com/' },
           { Title: '左书祺', URL: 'https://draveness.me/' },
           { Title: 'DarkSun的个人博客 linux和它的小伙伴', URL: 'http://blog.lujun9972.win/tags/linux%E5%92%8C%E5%AE%83%E7%9A%84%E5%B0%8F%E4%BC%99%E4%BC%B4/' },
           { Title: '曹春晖', URL: 'https://www.xargin.com/' },
