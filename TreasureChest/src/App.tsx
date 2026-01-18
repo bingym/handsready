@@ -34,8 +34,6 @@ const AsciiTable = lazy(() => import('./pages/reference/AsciiTable').then(m => (
 const TimeFormatPlaceholder = lazy(() => import('./pages/reference/TimeFormatPlaceholder').then(m => ({ default: m.TimeFormatPlaceholder })));
 const HtmlMark = lazy(() => import('./pages/reference/HtmlMark').then(m => ({ default: m.HtmlMark })));
 const Source = lazy(() => import('./pages/reference/Source').then(m => ({ default: m.Source })));
-const Domain = lazy(() => import('./pages/reference/Domain').then(m => ({ default: m.Domain })));
-const Carno = lazy(() => import('./pages/reference/Carno').then(m => ({ default: m.Carno })));
 
 const LoadingFallback = () => (
   <div className="flex items-center justify-center min-h-screen">
@@ -79,8 +77,6 @@ function App() {
             <Route path="reference/time-format-placeholder" element={<TimeFormatPlaceholder />} />
             <Route path="reference/http-mark" element={<HtmlMark />} />
             <Route path="reference/source" element={<Source />} />
-            <Route path="reference/domain" element={<Domain />} />
-            <Route path="reference/carno" element={<Carno />} />
             
             <Route path="*" element={<Navigate to="/" replace />} />
           </Route>

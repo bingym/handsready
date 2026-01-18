@@ -9,6 +9,9 @@ export default defineConfig({
     react(),
     tailwindcss(),
   ],
+  optimizeDeps: {
+    include: ['react-json-view'],
+  },
   build: {
     outDir: 'dist',
     emptyOutDir: true,
@@ -26,10 +29,16 @@ export default defineConfig({
             if (id.includes('crypto-js') || id.includes('qrcode')) {
               return 'utils-vendor';
             }
+            if (id.includes('react-json-view')) {
+              return 'json-viewer-vendor';
+            }
             // Other node_modules
             return 'vendor';
           }
           // Route-based code splitting
+          if (id.includes('/src/components/JsonViewer')) {
+            return 'json-viewer';
+          }
           if (id.includes('/src/pages/tool/')) {
             return 'tool-pages';
           }
