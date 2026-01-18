@@ -1,94 +1,96 @@
-# Treasure Chest 前端应用
+# Treasure Chest Frontend Application
 
-这是一个基于 React + TypeScript + Vite + Ant Design 的前端工具网站应用。
+This is a frontend tool website application based on React + TypeScript + Vite + Tailwind CSS.
 
-## 特性
+## Features
 
-- ✅ **完全独立运行**：前端应用可以独立运行，不依赖后端服务
-- ✅ **Browser Router**：使用 BrowserRouter，由 Nginx 代理支持
-- ✅ **数据内置**：所有工具和参考链接数据都内置在前端代码中
-- ✅ **响应式设计**：支持移动端和桌面端
-- ✅ **Docker 部署**：支持 Docker 容器化部署
+- ✅ **Fully Independent**: The frontend application can run independently without backend services
+- ✅ **Browser Router**: Uses BrowserRouter, supported by Nginx proxy
+- ✅ **Built-in Data**: All tool and reference link data are built into the frontend code
+- ✅ **Responsive Design**: Supports both mobile and desktop devices
+- ✅ **Docker Deployment**: Supports Docker containerized deployment
 
-## 开发
+## Development
 
-### 安装依赖
+### Install Dependencies
 
 ```bash
 yarn install
 ```
 
-### 启动开发服务器
+### Start Development Server
 
 ```bash
 yarn dev
 ```
 
-应用将在 `http://localhost:3000` 启动。
+The application will start at `http://localhost:3000`.
 
-### 构建生产版本
+### Build Production Version
 
 ```bash
 yarn build
 ```
 
-构建产物将输出到 `../static` 目录。
+The build output will be generated in the `../static` directory.
 
-## 项目结构
+## Project Structure
 
 ```
 src/
-├── components/        # 通用组件
-│   └── Layout/       # 布局组件（Header, Footer）
-├── pages/            # 页面组件
-│   ├── tool/         # 工具页面
-│   └── reference/    # 参考页面
-├── data/             # 数据文件
-│   ├── toolData.ts   # 工具数据
-│   └── referenceData.ts  # 参考链接数据
-├── services/         # API服务（当前未使用）
-├── types/            # TypeScript类型定义
-└── App.tsx           # 主应用组件
+├── components/        # Common components
+│   └── Layout/       # Layout components (Header, Footer)
+├── pages/            # Page components
+│   ├── tool/         # Tool pages
+│   └── reference/    # Reference pages
+├── data/             # Data files
+│   ├── toolData.ts   # Tool data
+│   └── referenceData.ts  # Reference link data
+├── services/         # API services (currently unused)
+├── types/            # TypeScript type definitions
+└── App.tsx           # Main application component
 ```
 
-## 数据管理
+## Data Management
 
-所有数据都定义在 `src/data/` 目录下：
-- `toolData.ts`：工具分类和工具列表
-- `referenceData.ts`：参考链接分类和链接列表
+All data is defined in the `src/data/` directory:
+- `toolData.ts`: Tool categories and tool list
+- `referenceData.ts`: Reference link categories and link list
 
-如需修改数据，直接编辑这些文件即可。
+To modify data, simply edit these files directly.
 
-## 路由
+## Routing
 
-应用使用 HashRouter，所有路由都使用 `#` 前缀：
-- `#/tool` - 工具首页
-- `#/tool/json-format` - JSON格式化工具
-- `#/reference` - 参考首页
-- 等等...
+The application uses BrowserRouter, all routes are standard paths:
+- `/tool` - Tools homepage
+- `/tool/json-format` - JSON formatting tool
+- `/reference` - Reference homepage
+- etc...
 
-## 部署
+## Deployment
 
-### 静态部署
+### Static Deployment
 
-构建后的应用可以部署到任何静态文件服务器：
+The built application can be deployed to any static file server:
 - GitHub Pages
 - Netlify
 - Vercel
 - Nginx
-- 等等...
+- etc...
 
-### 与后端集成
+### Backend Integration
 
-如果需要与 Go 后端集成：
-1. 构建前端：`yarn build`
-2. 构建产物会自动输出到 `../static` 目录
-3. Go 后端会自动服务这些静态文件
+If integration with Go backend is needed:
+1. Build frontend: `yarn build`
+2. Build output will be automatically generated in `../static` directory
+3. Go backend will automatically serve these static files
 
-## 技术栈
+## Tech Stack
 
 - React 19
 - TypeScript
 - Vite 7
-- Ant Design 6
-- React Router (HashRouter)
+- Tailwind CSS 4
+- React Router (BrowserRouter)
+- Lucide React (Icons)
+- Sonner (Toast Notifications)
