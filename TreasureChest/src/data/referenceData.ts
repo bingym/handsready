@@ -103,7 +103,6 @@ export const referenceData: LinkGroup[] = [
         Name: 'Server Development',
         Links: [
           { Title: 'ASCII码表', URL: '/reference/ascii-table' },
-          { Title: '时间格式化占位符', URL: '/reference/time-format-placeholder' },
           { Title: '镜像源', URL: '/reference/source' },
         ],
       },
@@ -116,28 +115,6 @@ export const referenceData: LinkGroup[] = [
         Name: 'Resume',
         Links: [
           { Title: '木及简历', URL: 'https://www.mujicv.com' },
-        ],
-      },
-    ],
-  },
-  {
-    Name: 'Life',
-    Data: [
-      {
-        Name: 'Life',
-        Links: [
-          { Title: '全国车牌大全', URL: '/reference/carno' },
-        ],
-      },
-    ],
-  },
-  {
-    Name: 'Webmaster',
-    Data: [
-      {
-        Name: 'Domain',
-        Links: [
-          { Title: '域名大全', URL: '/reference/domain' },
         ],
       },
     ],

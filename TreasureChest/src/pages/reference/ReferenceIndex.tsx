@@ -41,7 +41,12 @@ export const ReferenceIndex = () => {
                         rel={isInternal ? undefined : 'noopener noreferrer'}
                         className="block px-3 py-2 text-sm text-blue-600 hover:text-blue-800 hover:bg-blue-50 rounded transition-colors"
                       >
-                        {link.Title}
+                        <span className="flex items-center gap-1">
+                          {link.Title}
+                          {!isInternal && (
+                            <span className="text-xs opacity-70">↗</span>
+                          )}
+                        </span>
                       </a>
                     );
                   })}
