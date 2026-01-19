@@ -9,7 +9,7 @@ on:
         type: string
 
 env:
-  IMAGE_NAME: registry.cn-hangzhou.aliyuncs.com/bingym/treasure_chest_amd64
+  IMAGE_NAME: registry.cn-hangzhou.aliyuncs.com/bingym/treasure_chest
 
 jobs:
   build_image:

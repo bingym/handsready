@@ -1,5 +1,5 @@
 FROM node:22.17.0 as builder
-WORKDIR '/app'
+WORKDIR /app
 COPY TreasureChest /app
 
 RUN yarn install && yarn build
