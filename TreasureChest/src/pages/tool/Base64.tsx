@@ -11,6 +11,7 @@ export const Base64 = () => {
   const [input, setInput] = useState('');
   const [fileBase64, setFileBase64] = useState<string | null>(null); // 存储上传文件的 Base64
   const [isDragging, setIsDragging] = useState(false);
+  const dragCounterRef = useRef(0);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   // 实时编码/解码
@@ -99,13 +100,19 @@ export const Base64 = () => {
   const handleDragEnter = (e: React.DragEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    setIsDragging(true);
+    dragCounterRef.current += 1;
+    if (e.dataTransfer?.types.includes('Files')) {
+      setIsDragging(true);
+    }
   };
 
   const handleDragLeave = (e: React.DragEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    setIsDragging(false);
+    dragCounterRef.current -= 1;
+    if (dragCounterRef.current === 0) {
+      setIsDragging(false);
+    }
   };
 
   const handleDragOver = (e: React.DragEvent) => {
@@ -116,6 +123,7 @@ export const Base64 = () => {
   const handleDrop = (e: React.DragEvent) => {
     e.preventDefault();
     e.stopPropagation();
+    dragCounterRef.current = 0;
     setIsDragging(false);
 
     const files = e.dataTransfer.files;

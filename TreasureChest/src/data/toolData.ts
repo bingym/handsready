@@ -21,7 +21,6 @@ export const toolData: FuncGroup[] = [
     Name: 'Photography',
     Data: [
       { Name: 'EXIF Info', Path: '/tool/exif-info' },
-      { Name: 'Sony Camera Shutter Count', Path: '/tool/sony-shutters' },
     ],
   },
   {

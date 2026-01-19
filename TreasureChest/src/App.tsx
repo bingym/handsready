@@ -24,7 +24,6 @@ const ByteCalc = lazy(() => import('./pages/tool/ByteCalc').then(m => ({ default
 const TextDiff = lazy(() => import('./pages/tool/TextDiff').then(m => ({ default: m.TextDiff })));
 const ByteCount = lazy(() => import('./pages/tool/ByteCount').then(m => ({ default: m.ByteCount })));
 const ExifInfo = lazy(() => import('./pages/tool/ExifInfo').then(m => ({ default: m.ExifInfo })));
-const SonyShutters = lazy(() => import('./pages/tool/SonyShutters').then(m => ({ default: m.SonyShutters })));
 const Qrcode = lazy(() => import('./pages/tool/Qrcode').then(m => ({ default: m.Qrcode })));
 const RandomChars = lazy(() => import('./pages/tool/RandomChars').then(m => ({ default: m.RandomChars })));
 
@@ -66,7 +65,6 @@ function App() {
             <Route path="tool/word-count" element={<WordCount />} />
             <Route path="tool/byte-count" element={<ByteCount />} />
             <Route path="tool/exif-info" element={<ExifInfo />} />
-            <Route path="tool/sony-shutters" element={<SonyShutters />} />
             <Route path="tool/qrcode" element={<Qrcode />} />
             <Route path="tool/random-chars" element={<RandomChars />} />
             

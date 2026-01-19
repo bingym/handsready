@@ -29,6 +29,12 @@ export default defineConfig({
             if (id.includes('crypto-js') || id.includes('qrcode')) {
               return 'utils-vendor';
             }
+            if (id.includes('exifr')) {
+              return 'exif-vendor';
+            }
+            if (id.includes('sql-formatter')) {
+              return 'sql-formatter-vendor';
+            }
             if (id.includes('react-json-view')) {
               return 'json-viewer-vendor';
             }
