@@ -1,22 +1,67 @@
-import { useState } from 'react';
-import { Card, CardContent } from '@/components/ui/Card';
+import { useState, useMemo } from 'react';
 import { Input } from '@/components/ui/Input';
-import { toast } from '@/lib/toast';
+
+type UnitType = 'bit' | 'byte' | 'kilobyte' | 'megabyte' | 'gigabyte' | 'terabyte' | 'petabyte';
+
+interface UnitConfig {
+  key: UnitType;
+  label: string;
+  shortLabel: string;
+}
+
+const units: UnitConfig[] = [
+  { key: 'bit', label: 'Bit', shortLabel: 'b' },
+  { key: 'byte', label: 'Byte', shortLabel: 'B' },
+  { key: 'kilobyte', label: 'Kilobyte', shortLabel: 'KB' },
+  { key: 'megabyte', label: 'Megabyte', shortLabel: 'MB' },
+  { key: 'gigabyte', label: 'Gigabyte', shortLabel: 'GB' },
+  { key: 'terabyte', label: 'Terabyte', shortLabel: 'TB' },
+  { key: 'petabyte', label: 'Petabyte', shortLabel: 'PB' },
+];
+
+const formatNumber = (num: number): string => {
+  if (num === 0) return '0';
+  if (Math.abs(num) < 0.000001) {
+    return num.toExponential(6);
+  }
+  if (Math.abs(num) >= 1000000000000) {
+    return num.toExponential(6);
+  }
+  // 保留最多 6 位有效数字
+  const magnitude = Math.floor(Math.log10(Math.abs(num)));
+  const factor = Math.pow(10, 6 - magnitude - 1);
+  const rounded = Math.round(num * factor) / factor;
+  return rounded.toString();
+};
 
 export const ByteCalc = () => {
-  const [values, setValues] = useState({
-    bit: '',
-    byte: '',
-    kilobyte: '',
-    megabyte: '',
-    gigabyte: '',
-    terabyte: '',
-  });
+  const [activeUnit, setActiveUnit] = useState<UnitType | null>(null);
+  const [inputValue, setInputValue] = useState('');
 
-  const updateValues = (type: string, value: number) => {
+  const calculateValues = useMemo(() => {
+    if (!activeUnit || !inputValue.trim()) {
+      return {
+        bit: '',
+        byte: '',
+        kilobyte: '',
+        megabyte: '',
+        gigabyte: '',
+        terabyte: '',
+        petabyte: '',
+      };
+    }
+
+    const value = parseFloat(inputValue);
     if (isNaN(value)) {
-      toast.error('Please enter a valid number');
-      return;
+      return {
+        bit: '',
+        byte: '',
+        kilobyte: '',
+        megabyte: '',
+        gigabyte: '',
+        terabyte: '',
+        petabyte: '',
+      };
     }
 
     let bits = 0;
@@ -25,8 +70,9 @@ export const ByteCalc = () => {
     let mbs = 0;
     let gbs = 0;
     let tbs = 0;
+    let pbs = 0;
 
-    switch (type) {
+    switch (activeUnit) {
       case 'bit':
         bits = value;
         bytes = value / 8;
@@ -34,6 +80,7 @@ export const ByteCalc = () => {
         mbs = value / 8 / Math.pow(1024, 2);
         gbs = value / 8 / Math.pow(1024, 3);
         tbs = value / 8 / Math.pow(1024, 4);
+        pbs = value / 8 / Math.pow(1024, 5);
         break;
       case 'byte':
         bits = value * 8;
@@ -42,6 +89,7 @@ export const ByteCalc = () => {
         mbs = value / Math.pow(1024, 2);
         gbs = value / Math.pow(1024, 3);
         tbs = value / Math.pow(1024, 4);
+        pbs = value / Math.pow(1024, 5);
         break;
       case 'kilobyte':
         bits = value * 8 * 1024;
@@ -50,6 +98,7 @@ export const ByteCalc = () => {
         mbs = value / 1024;
         gbs = value / Math.pow(1024, 2);
         tbs = value / Math.pow(1024, 3);
+        pbs = value / Math.pow(1024, 4);
         break;
       case 'megabyte':
         bits = value * 8 * Math.pow(1024, 2);
@@ -58,6 +107,7 @@ export const ByteCalc = () => {
         mbs = value;
         gbs = value / 1024;
         tbs = value / Math.pow(1024, 2);
+        pbs = value / Math.pow(1024, 3);
         break;
       case 'gigabyte':
         bits = value * 8 * Math.pow(1024, 3);
@@ -66,6 +116,7 @@ export const ByteCalc = () => {
         mbs = value * 1024;
         gbs = value;
         tbs = value / 1024;
+        pbs = value / Math.pow(1024, 2);
         break;
       case 'terabyte':
         bits = value * 8 * Math.pow(1024, 4);
@@ -74,83 +125,76 @@ export const ByteCalc = () => {
         mbs = value * Math.pow(1024, 2);
         gbs = value * 1024;
         tbs = value;
+        pbs = value / 1024;
+        break;
+      case 'petabyte':
+        bits = value * 8 * Math.pow(1024, 5);
+        bytes = value * Math.pow(1024, 5);
+        kbs = value * Math.pow(1024, 4);
+        mbs = value * Math.pow(1024, 3);
+        gbs = value * Math.pow(1024, 2);
+        tbs = value * 1024;
+        pbs = value;
         break;
     }
 
-    setValues({
-      bit: bits.toString(),
-      byte: bytes.toString(),
-      kilobyte: kbs.toString(),
-      megabyte: mbs.toString(),
-      gigabyte: gbs.toString(),
-      terabyte: tbs.toString(),
-    });
+    return {
+      bit: formatNumber(bits),
+      byte: formatNumber(bytes),
+      kilobyte: formatNumber(kbs),
+      megabyte: formatNumber(mbs),
+      gigabyte: formatNumber(gbs),
+      terabyte: formatNumber(tbs),
+      petabyte: formatNumber(pbs),
+    };
+  }, [activeUnit, inputValue]);
+
+  const handleInputChange = (unit: UnitType, value: string) => {
+    if (value.trim() === '') {
+      setActiveUnit(null);
+      setInputValue('');
+    } else {
+      setActiveUnit(unit);
+      setInputValue(value);
+    }
   };
 
-  const handleChange = (type: string, value: string) => {
-    const numValue = parseFloat(value);
-    if (value === '' || isNaN(numValue)) {
-      setValues({ ...values, [type]: value });
-      return;
+  const getDisplayValue = (unit: UnitType): string => {
+    if (activeUnit === unit) {
+      return inputValue;
     }
-    updateValues(type, numValue);
+    return calculateValues[unit];
   };
 
   return (
-    <div>
-      <h1 className="text-3xl font-bold mb-8">Byte Calculator</h1>
-      <Card>
-        <CardContent className="space-y-4 pt-6">
-          <div>
-            <label className="block text-sm font-medium mb-2">bit(b)</label>
+    <div className="space-y-6">
+      <div className="flex items-center justify-between">
+        <h1 className="text-3xl font-bold">Byte Calculator</h1>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        {units.map((unit) => (
+          <div key={unit.key} className="space-y-2">
+            <label className="block text-sm font-medium text-gray-700">
+              {unit.label} ({unit.shortLabel})
+            </label>
             <Input
-              value={values.bit}
-              onChange={(e) => handleChange('bit', e.target.value)}
-              placeholder="Enter bit value"
+              value={getDisplayValue(unit.key)}
+              onChange={(e) => handleInputChange(unit.key, e.target.value)}
+              placeholder={`Enter ${unit.shortLabel} value`}
+              className="font-mono"
             />
           </div>
-          <div>
-            <label className="block text-sm font-medium mb-2">byte(B)</label>
-            <Input
-              value={values.byte}
-              onChange={(e) => handleChange('byte', e.target.value)}
-              placeholder="Enter byte value"
-            />
+        ))}
+      </div>
+
+      {activeUnit && inputValue && (
+        <div className="mt-6 p-4 bg-blue-50 rounded-lg border border-blue-200">
+          <div className="text-sm text-blue-800">
+            <span className="font-semibold">Active:</span> {units.find(u => u.key === activeUnit)?.label} = {inputValue} {units.find(u => u.key === activeUnit)?.shortLabel}
           </div>
-          <div>
-            <label className="block text-sm font-medium mb-2">kilobyte(KB)</label>
-            <Input
-              value={values.kilobyte}
-              onChange={(e) => handleChange('kilobyte', e.target.value)}
-              placeholder="Enter KB value"
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium mb-2">megabyte(MB)</label>
-            <Input
-              value={values.megabyte}
-              onChange={(e) => handleChange('megabyte', e.target.value)}
-              placeholder="Enter MB value"
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium mb-2">gigabyte(GB)</label>
-            <Input
-              value={values.gigabyte}
-              onChange={(e) => handleChange('gigabyte', e.target.value)}
-              placeholder="Enter GB value"
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium mb-2">terabyte(TB)</label>
-            <Input
-              value={values.terabyte}
-              onChange={(e) => handleChange('terabyte', e.target.value)}
-              placeholder="Enter TB value"
-            />
-          </div>
-        </CardContent>
-      </Card>
+        </div>
+      )}
     </div>
   );
 };

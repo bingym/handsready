@@ -10,7 +10,6 @@ export const toolData: FuncGroup[] = [
       { Name: 'MD5', Path: '/tool/md5' },
       { Name: 'Base64 Encode/Decode', Path: '/tool/base64' },
       { Name: 'Unicode/Chinese', Path: '/tool/unicode-zh' },
-      { Name: 'Regular Expression', Path: '/tool/regex' },
       { Name: 'Byte Calculator', Path: '/tool/byte-calc' },
       { Name: 'UUID', Path: '/tool/uuid' },
       { Name: 'URL Encode/Decode', Path: '/tool/url-encode-decode' },

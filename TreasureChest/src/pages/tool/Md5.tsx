@@ -1,78 +1,132 @@
-import { useState } from 'react';
-import { Card, CardContent } from '@/components/ui/Card';
+import { useState, useMemo } from 'react';
 import { Button } from '@/components/ui/Button';
 import { Input, Textarea } from '@/components/ui/Input';
-import { Copy } from 'lucide-react';
+import { Copy, CheckCircle2 } from 'lucide-react';
 import CryptoJS from 'crypto-js';
 import { toast } from '@/lib/toast';
 
 export const Md5 = () => {
   const [input, setInput] = useState('');
   const [key, setKey] = useState('');
-  const [output, setOutput] = useState('');
+  const [caseType, setCaseType] = useState<'lower' | 'upper'>('lower');
 
-  const handleEncrypt = () => {
-    if (key.trim() !== '') {
-      setOutput(CryptoJS.HmacMD5(input, key).toString());
-    } else {
-      setOutput(CryptoJS.MD5(input).toString());
+  // 实时计算 MD5
+  const md5Result = useMemo(() => {
+    if (!input.trim()) {
+      return null;
+    }
+
+    try {
+      let hash: string;
+      if (key.trim() !== '') {
+        hash = CryptoJS.HmacMD5(input, key).toString();
+      } else {
+        hash = CryptoJS.MD5(input).toString();
+      }
+      
+      return caseType === 'upper' ? hash.toUpperCase() : hash.toLowerCase();
+    } catch {
+      return null;
+    }
+  }, [input, key, caseType]);
+
+  const handleCopy = () => {
+    if (md5Result) {
+      navigator.clipboard.writeText(md5Result);
+      toast.success('MD5 hash copied');
     }
   };
 
-  const handleToUpper = () => {
-    setOutput(output.toUpperCase());
-  };
-
-  const handleCopy = () => {
-    navigator.clipboard.writeText(output);
-    toast.success('Copied to clipboard');
-  };
-
   return (
-    <div>
-      <h1 className="text-3xl font-bold mb-8">MD5</h1>
-      <Card>
-        <CardContent className="space-y-4 pt-6">
-          <div>
+    <div className="space-y-6">
+      <div className="flex items-center justify-between">
+        <h1 className="text-3xl font-bold">MD5 Hash</h1>
+      </div>
+
+      {/* Options */}
+      <div className="flex items-center gap-4 flex-wrap">
+        <div className="flex items-center gap-2">
+          <label className="text-sm font-medium text-gray-700">HMAC Key:</label>
+          <Input
+            placeholder="Optional HMAC-MD5 key"
+            value={key}
+            onChange={(e) => setKey(e.target.value)}
+            className="w-64 font-mono text-sm"
+          />
+        </div>
+        <div className="flex items-center gap-2">
+          <label className="text-sm font-medium text-gray-700">Case:</label>
+          <select
+            value={caseType}
+            onChange={(e) => setCaseType(e.target.value as 'lower' | 'upper')}
+            className="px-3 py-1.5 text-sm border border-gray-300 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-950 focus-visible:ring-offset-2"
+          >
+            <option value="lower">lowercase</option>
+            <option value="upper">UPPERCASE</option>
+          </select>
+        </div>
+      </div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {/* Input */}
+        <div className="space-y-2 flex flex-col">
+          <div className="flex items-center justify-between">
+            <label className="block text-sm font-medium text-gray-700">
+              Input Text
+            </label>
+            {input && (
+              <div className="flex items-center gap-2">
+                <span className="text-xs text-green-600 flex items-center gap-1">
+                  <CheckCircle2 className="w-3 h-3" />
+                  Ready
+                </span>
+              </div>
+            )}
+          </div>
+          <div className="flex-1 flex flex-col min-h-[500px]">
             <Textarea
-              rows={10}
-              placeholder="Content to encrypt"
+              rows={20}
+              placeholder="Enter text to hash..."
               value={input}
               onChange={(e) => setInput(e.target.value)}
+              className="w-full h-full font-mono text-sm resize-none"
             />
           </div>
-          <div>
-            <Input
-              placeholder="HMAC-MD5 key (optional)"
-              value={key}
-              onChange={(e) => setKey(e.target.value)}
-            />
-          </div>
-          <div className="flex gap-2">
-            <Button onClick={handleEncrypt}>
-              Encrypt ↓
-            </Button>
-            <Button disabled>Decrypt ↑ (Not supported)</Button>
-          </div>
-          <div>
-            <Textarea
-              rows={10}
-              placeholder="Encrypted content"
-              value={output}
-              readOnly
-            />
-          </div>
-          <div className="flex gap-2">
-            <Button onClick={handleToUpper}>To Uppercase</Button>
-            {output && (
-              <Button onClick={handleCopy} className="flex items-center gap-2">
-                <Copy className="w-4 h-4" />
-                Copy Result
+        </div>
+
+        {/* Output */}
+        <div className="space-y-2 flex flex-col">
+          <div className="flex items-center justify-between">
+            <label className="block text-sm font-medium text-gray-700">
+              MD5 Hash
+            </label>
+            {md5Result && (
+              <Button
+                onClick={handleCopy}
+                variant="outline"
+                className="px-2 py-1 text-xs flex items-center gap-1"
+              >
+                <Copy className="w-3 h-3" />
+                Copy
               </Button>
             )}
           </div>
-        </CardContent>
-      </Card>
+          <div className="flex-1 flex flex-col min-h-[500px]">
+            {md5Result ? (
+              <Textarea
+                rows={20}
+                value={md5Result}
+                readOnly
+                className="w-full h-full font-mono text-sm resize-none bg-gray-50"
+              />
+            ) : (
+              <div className="w-full h-full bg-gray-50 rounded-lg border border-gray-200 flex items-center justify-center">
+                <div className="text-gray-400 text-sm">MD5 hash will appear here...</div>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
