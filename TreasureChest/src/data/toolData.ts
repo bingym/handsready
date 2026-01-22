@@ -8,6 +8,7 @@ export const toolData: FuncGroup[] = [
       { Name: 'SQL Formatter', Path: '/tool/sql-format' },
       { Name: 'Timestamp', Path: '/tool/timestamp' },
       { Name: 'MD5', Path: '/tool/md5' },
+      { Name: 'SHA256', Path: '/tool/sha256' },
       { Name: 'Base64 Encode/Decode', Path: '/tool/base64' },
       { Name: 'Unicode/Chinese', Path: '/tool/unicode-zh' },
       { Name: 'Byte Calculator', Path: '/tool/byte-calc' },
@@ -21,6 +22,7 @@ export const toolData: FuncGroup[] = [
     Name: 'Photography',
     Data: [
       { Name: 'EXIF Info', Path: '/tool/exif-info' },
+      { Name: 'Image Compress', Path: '/tool/image-compress' },
     ],
   },
   {

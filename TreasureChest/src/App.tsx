@@ -16,6 +16,7 @@ const Base64 = lazy(() => import('./pages/tool/Base64').then(m => ({ default: m.
 const Timestamp = lazy(() => import('./pages/tool/Timestamp').then(m => ({ default: m.Timestamp })));
 const UUID = lazy(() => import('./pages/tool/UUID').then(m => ({ default: m.UUID })));
 const Md5 = lazy(() => import('./pages/tool/Md5').then(m => ({ default: m.Md5 })));
+const Sha256 = lazy(() => import('./pages/tool/Sha256').then(m => ({ default: m.Sha256 })));
 const UrlEncodeDecode = lazy(() => import('./pages/tool/UrlEncodeDecode').then(m => ({ default: m.UrlEncodeDecode })));
 const WordCount = lazy(() => import('./pages/tool/WordCount').then(m => ({ default: m.WordCount })));
 const SqlFormat = lazy(() => import('./pages/tool/SqlFormat').then(m => ({ default: m.SqlFormat })));
@@ -24,6 +25,7 @@ const ByteCalc = lazy(() => import('./pages/tool/ByteCalc').then(m => ({ default
 const TextDiff = lazy(() => import('./pages/tool/TextDiff').then(m => ({ default: m.TextDiff })));
 const ByteCount = lazy(() => import('./pages/tool/ByteCount').then(m => ({ default: m.ByteCount })));
 const ExifInfo = lazy(() => import('./pages/tool/ExifInfo').then(m => ({ default: m.ExifInfo })));
+const ImageCompress = lazy(() => import('./pages/tool/ImageCompress').then(m => ({ default: m.ImageCompress })));
 const Qrcode = lazy(() => import('./pages/tool/Qrcode').then(m => ({ default: m.Qrcode })));
 const RandomChars = lazy(() => import('./pages/tool/RandomChars').then(m => ({ default: m.RandomChars })));
 
@@ -56,6 +58,7 @@ function App() {
             <Route path="tool/sql-format" element={<SqlFormat />} />
             <Route path="tool/timestamp" element={<Timestamp />} />
             <Route path="tool/md5" element={<Md5 />} />
+            <Route path="tool/sha256" element={<Sha256 />} />
             <Route path="tool/base64" element={<Base64 />} />
             <Route path="tool/unicode-zh" element={<UnicodeZh />} />
             <Route path="tool/byte-calc" element={<ByteCalc />} />
@@ -65,6 +68,7 @@ function App() {
             <Route path="tool/word-count" element={<WordCount />} />
             <Route path="tool/byte-count" element={<ByteCount />} />
             <Route path="tool/exif-info" element={<ExifInfo />} />
+            <Route path="tool/image-compress" element={<ImageCompress />} />
             <Route path="tool/qrcode" element={<Qrcode />} />
             <Route path="tool/random-chars" element={<RandomChars />} />
             

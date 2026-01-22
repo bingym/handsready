@@ -1,4 +1,4 @@
-FROM node:22.17.0 as builder
+FROM node:22.17.0 AS builder
 WORKDIR /app
 COPY TreasureChest /app
 
