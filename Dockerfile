@@ -1,7 +1,10 @@
-FROM golang:1.17
-ENV GOPROXY https://goproxy.cn
-COPY . /app
+FROM node:22.17.0 AS builder
 WORKDIR /app
-RUN go build
-EXPOSE 5200
-ENTRYPOINT ["sh", "boot.sh"]
+COPY TreasureChest /app
+
+RUN yarn install && yarn build
+
+FROM nginx:alpine
+COPY --from=builder /app/dist /usr/share/nginx/html
+COPY nginx.conf /etc/nginx/nginx.conf
+CMD ["nginx", "-g", "daemon off;"]
