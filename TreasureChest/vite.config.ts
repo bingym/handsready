@@ -10,7 +10,7 @@ export default defineConfig({
     tailwindcss(),
   ],
   optimizeDeps: {
-    include: ['react-json-view'],
+    include: ['react18-json-view'],
   },
   build: {
     outDir: 'dist',
@@ -35,7 +35,7 @@ export default defineConfig({
             if (id.includes('sql-formatter')) {
               return 'sql-formatter-vendor';
             }
-            if (id.includes('react-json-view')) {
+            if (id.includes('react18-json-view')) {
               return 'json-viewer-vendor';
             }
             // Other node_modules
