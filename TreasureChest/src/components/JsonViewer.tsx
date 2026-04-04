@@ -12,7 +12,6 @@ export const JsonViewer = ({
   data, 
   collapsed = false,
   theme = 'light',
-  indentWidth = 4,
 }: JsonViewerProps) => {
   if (data === null || data === undefined || (typeof data !== 'object' && !Array.isArray(data))) {
     return (
