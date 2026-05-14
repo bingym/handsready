@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <!-- Background rounded square -->
+  <rect width="128" height="128" rx="28" fill="#1a2332"/>
+  <!-- Wrench body -->
+  <g transform="translate(64,64) rotate(-45)">
+    <!-- Shaft -->
+    <rect x="-7" y="-36" width="14" height="48" rx="4" fill="#f1f5f9"/>
+    <!-- Head (open-end wrench) -->
+    <path d="M-18,-36 Q-18,-54 0,-54 Q18,-54 18,-36 L12,-36 Q12,-46 0,-46 Q-12,-46 -12,-36 Z" fill="#f1f5f9"/>
+    <!-- Handle end -->
+    <path d="M-11,12 L-14,32 Q-14,38 -7,38 L7,38 Q14,38 14,32 L11,12 Z" fill="#f1f5f9"/>
+  </g>
+  <!-- Lightning accent -->
+  <path d="M78,22 L68,42 L76,42 L66,62 L84,38 L76,38 L86,22 Z" fill="#facc15" opacity="0.9"/>
+</svg>
