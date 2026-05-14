@@ -1,1 +1,0 @@
-import{j as e}from"./react-vendor-CYyopO8c.js";import"./vendor-Et5EhOKb.js";const s=()=>e.jsxs("div",{children:[e.jsx("h1",{className:"text-3xl font-bold mb-6",children:"About"}),e.jsx("p",{className:"text-gray-700 leading-relaxed",children:"This is a collection of utility tools and reference resources for developers."})]});export{s as About};
