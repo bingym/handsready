@@ -1,10 +1,7 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "hands-ready",
+  "name": "handsready",
   "compatibility_date": "2026-04-10",
-  "observability": {
-    "enabled": true
-  },
   "assets": {
     "not_found_handling": "single-page-application"
   },
