@@ -31,6 +31,7 @@ export const toolData: FuncGroup[] = [
       { Name: 'QR Code', Path: '/tool/qrcode', Description: 'Generate QR code from text or URL' },
       { Name: 'Random Password Generator', Path: '/tool/random-chars', Description: 'Generate random passwords and strings' },
       { Name: 'Text Diff', Path: '/tool/text-diff', Description: 'Compare two texts and highlight differences' },
+      { Name: 'Core Values Encoder', Path: '/tool/core-values-encoder', Description: 'Encode/decode text with core socialist values' },
     ],
   },
 ];

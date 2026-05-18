@@ -31,6 +31,7 @@ const ExifInfo = lazy(() => import('./pages/tool/ExifInfo').then(m => ({ default
 const ImageCompress = lazy(() => import('./pages/tool/ImageCompress').then(m => ({ default: m.ImageCompress })));
 const Qrcode = lazy(() => import('./pages/tool/Qrcode').then(m => ({ default: m.Qrcode })));
 const RandomChars = lazy(() => import('./pages/tool/RandomChars').then(m => ({ default: m.RandomChars })));
+const CoreValuesEncoder = lazy(() => import('./pages/tool/CoreValuesEncoder').then(m => ({ default: m.CoreValuesEncoder })));
 
 const HttpCode = lazy(() => import('./pages/reference/HttpCode').then(m => ({ default: m.HttpCode })));
 const AsciiTable = lazy(() => import('./pages/reference/AsciiTable').then(m => ({ default: m.AsciiTable })));
@@ -65,6 +66,7 @@ function App() {
           <Route path="tool/image-compress" element={<Lazy><ImageCompress /></Lazy>} />
           <Route path="tool/qrcode" element={<Lazy><Qrcode /></Lazy>} />
           <Route path="tool/random-chars" element={<Lazy><RandomChars /></Lazy>} />
+          <Route path="tool/core-values-encoder" element={<Lazy><CoreValuesEncoder /></Lazy>} />
 
           <Route path="reference" element={<Lazy><ReferenceIndex /></Lazy>} />
           <Route path="reference/http-code" element={<Lazy><HttpCode /></Lazy>} />
