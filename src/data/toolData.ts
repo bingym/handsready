@@ -15,6 +15,7 @@ export const toolData: FuncGroup[] = [
       { Name: 'UUID', Path: '/tool/uuid', Description: 'Generate UUID v4 in various formats' },
       { Name: 'URL Encode/Decode', Path: '/tool/url-encode-decode', Description: 'Encode/decode URL components' },
       { Name: 'Word Count', Path: '/tool/word-count', Description: 'Count words, chars, lines and paragraphs' },
+      { Name: 'Markdown Preview', Path: '/tool/markdown-preview', Description: 'Edit Markdown on the left, preview on the right' },
       { Name: 'Byte Count', Path: '/tool/byte-count', Description: 'Calculate string byte size in UTF-8/16/32' },
     ],
   },

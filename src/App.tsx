@@ -35,6 +35,7 @@ const CoreValuesEncoder = lazy(() => import('./pages/tool/CoreValuesEncoder').th
 const NoiseMeter = lazy(() => import('./pages/tool/NoiseMeter').then(m => ({ default: m.NoiseMeter })));
 const FuelCostCalc = lazy(() => import('./pages/tool/FuelCostCalc').then(m => ({ default: m.FuelCostCalc })));
 const LicensePlate = lazy(() => import('./pages/tool/LicensePlate').then(m => ({ default: m.LicensePlate })));
+const MarkdownPreview = lazy(() => import('./pages/tool/MarkdownPreview').then(m => ({ default: m.MarkdownPreview })));
 
 const HttpCode = lazy(() => import('./pages/reference/HttpCode').then(m => ({ default: m.HttpCode })));
 const AsciiTable = lazy(() => import('./pages/reference/AsciiTable').then(m => ({ default: m.AsciiTable })));
@@ -73,6 +74,7 @@ function App() {
           <Route path="tool/noise-meter" element={<Lazy><NoiseMeter /></Lazy>} />
           <Route path="tool/fuel-cost-calc" element={<Lazy><FuelCostCalc /></Lazy>} />
           <Route path="tool/license-plate" element={<Lazy><LicensePlate /></Lazy>} />
+          <Route path="tool/markdown-preview" element={<Lazy><MarkdownPreview /></Lazy>} />
 
           <Route path="reference" element={<Lazy><ReferenceIndex /></Lazy>} />
           <Route path="reference/http-code" element={<Lazy><HttpCode /></Lazy>} />
