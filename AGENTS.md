@@ -8,8 +8,8 @@
 ## Project Overview
 
 Hands Ready is a browser-based developer toolbox. React 19 + TypeScript + Vite 7 +
-Tailwind CSS 4, client-side only, deployed to Cloudflare Workers as a static SPA
-(`wrangler.jsonc` uses `not_found_handling: single-page-application`).
+Tailwind CSS 4, client-side interactive tools with build-time route prerendering,
+deployed to Cloudflare Workers as static Assets (`wrangler.jsonc` uses 404 handling).
 Package manager: **pnpm**.
 
 ## Commands
@@ -18,7 +18,7 @@ Package manager: **pnpm**.
 pnpm install
 pnpm dev      # dev server, host 0.0.0.0
 pnpm lint     # eslint
-pnpm build    # tsc -b && vite build -> dist/
+pnpm build    # tsc -b && Vite client/SSR builds + route prerender -> dist/
 pnpm deploy   # build + wrangler deploy
 ```
 
@@ -29,6 +29,9 @@ Always verify with `pnpm run build` after changing code.
 ```
 src/
   App.tsx               # all routes, all pages lazy-loaded via Suspense + PageSkeleton
+  ssr.tsx               # build-time route renderer and per-route SEO metadata
+scripts/
+  prerender.mjs         # writes route HTML, sitemap.xml and robots.txt after Vite builds
   components/Layout/    # AppLayout (h-screen flex, Sidebar + main Outlet), Sidebar, Footer
   components/ui/        # shared Button, Input/Textarea, Card — use these in tools
   pages/tool/           # one .tsx per tool + ToolIndex.tsx (search + category tabs)

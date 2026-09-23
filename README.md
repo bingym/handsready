@@ -1,7 +1,7 @@
 # Hands Ready
 
 A browser-based developer toolbox built with React + TypeScript + Vite + Tailwind CSS.
-All tools run entirely in the browser — no backend required. Deployed to Cloudflare Workers as a static SPA.
+All tools run entirely in the browser — no backend required. Routes are prerendered to static HTML and deployed to Cloudflare Workers Assets.
 
 ## Tools
 
@@ -55,11 +55,11 @@ pnpm lint     # run eslint
 ## Build & Deploy
 
 ```bash
-pnpm build    # tsc + vite build, output to dist/
+pnpm build    # type-check, build client + SSR renderer, prerender routes into dist/
 pnpm deploy   # build + deploy to Cloudflare Workers
 ```
 
-The app is served as a single-page application (`not_found_handling: single-page-application` in `wrangler.jsonc`), with unknown routes redirecting to `/`.
+The build emits a static HTML file per route under `dist/`, plus `sitemap.xml` and `robots.txt`. Cloudflare serves missing routes as 404s; client-side React hydrates each prerendered page for tool interactions.
 
 ## Project Structure
 

@@ -1,5 +1,5 @@
 import { useState, useMemo } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Search } from 'lucide-react';
 import { toolData } from '@/data/toolData';
 
@@ -7,7 +7,6 @@ const ALL_TAG = 'All';
 const categories = [ALL_TAG, ...toolData.map(g => g.Name)];
 
 export const ToolIndex = () => {
-  const navigate = useNavigate();
   const [search, setSearch] = useState('');
   const [activeCategory, setActiveCategory] = useState(ALL_TAG);
 
@@ -70,9 +69,9 @@ export const ToolIndex = () => {
               <h2 className="text-xl font-semibold mb-4 text-gray-900">{group.Name}</h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
                 {group.Data.map((func, fi) => (
-                  <button
+                  <Link
                     key={fi}
-                    onClick={() => navigate(func.Path)}
+                    to={func.Path}
                     className="group relative text-left p-4 rounded-lg border border-gray-200 bg-white hover:border-gray-300 hover:shadow-sm transition-all duration-200"
                   >
                     <div className="font-medium text-gray-900 group-hover:text-gray-950">
@@ -83,7 +82,7 @@ export const ToolIndex = () => {
                         {func.Description}
                       </div>
                     )}
-                  </button>
+                  </Link>
                 ))}
               </div>
             </section>

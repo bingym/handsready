@@ -9,7 +9,6 @@ const Lazy = ({ children }: { children: ReactNode }) => (
   <Suspense fallback={<PageSkeleton />}>{children}</Suspense>
 );
 
-const Home = lazy(() => import('./pages/Home').then(m => ({ default: m.Home })));
 const About = lazy(() => import('./pages/About').then(m => ({ default: m.About })));
 const ToolIndex = lazy(() => import('./pages/tool/ToolIndex').then(m => ({ default: m.ToolIndex })));
 const ReferenceIndex = lazy(() => import('./pages/reference/ReferenceIndex').then(m => ({ default: m.ReferenceIndex })));
@@ -49,7 +48,7 @@ function App() {
       <Toaster position="top-right" />
       <Routes>
         <Route path="/" element={<AppLayout />}>
-          <Route index element={<Lazy><Home /></Lazy>} />
+          <Route index element={<Lazy><ToolIndex /></Lazy>} />
           <Route path="about" element={<Lazy><About /></Lazy>} />
 
           <Route path="tool" element={<Lazy><ToolIndex /></Lazy>} />
