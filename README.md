@@ -56,7 +56,7 @@ pnpm lint     # run eslint
 
 ```bash
 pnpm build    # type-check, build client + SSR renderer, prerender routes into dist/
-pnpm deploy   # build + deploy to Cloudflare Workers
+pnpm deploy   # build + deploy dist/ assets to Cloudflare Workers
 ```
 
 The build emits a static HTML file per route under `dist/`, plus `sitemap.xml` and `robots.txt`. Cloudflare serves missing routes as 404s; client-side React hydrates each prerendered page for tool interactions.
